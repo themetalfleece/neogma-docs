@@ -27,7 +27,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
 ### Updating an Instance
 ```js
     /* --> given a user Instance, like the one created above, we can change the properties of the Instance */
-    user.name = 'Bob';
+    user.name = 'Alex';
 
     /* --> we reflect this change to the database. Since the node already exists in the databse, neogma will automatically run a MATCH-SET operation to update just the name of this node */
     await user.save({
@@ -37,11 +37,11 @@ An Instance is returned from various Model operations (such as Create, Find), or
 ### Accessing the Instance's properties and methods
 ```js
     /* --> the Instance's properties and methods are accessible by their key */
-    console.log(user.id, user.name, user.age); // '1' 'Bob' 38
+    console.log(user.id, user.name, user.age); // '1' 'Alex' 38
     /* --> all the instance properties can be taken as follows */
-    console.log(user.getDataValues()); // { id: '1', name: 'Bob', age: 38 }
+    console.log(user.getDataValues()); // { id: '1', name: 'Alex', age: 38 }
     /* --> the methods, used in the Model definition can be used */
-    console.log(user.bar()); // 'The name of this user is: Bob'
+    console.log(user.bar()); // 'The name of this user is: Alex'
 ```
 
 ### Validating the Instance

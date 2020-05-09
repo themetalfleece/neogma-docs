@@ -2,7 +2,7 @@
 
 Apart from building and saving an [Instance](./Instances), each model provides functions to directly create nodes and relationships.
 
-# Creating or a single node of the Model
+### Creating or a single node of the Model
 ```js
 /* --> create a User node and get the Instance */
 const user = await Users.createOne(
@@ -24,7 +24,7 @@ const user = await Users.createOne(
 console.log(user.name); // 'John'
 ```
 
-# Creating a single node of the Model while relating it with other nodes
+### Creating a single node of the Model while relating it with other nodes
 TODO link where
 Neogma provides functionality for creating other nodes while creating a given node, and associating them automatically. Instead of creating the associated nodes, they can also be matched by a where clause. Everything runs in a single statement.
 ```js
@@ -77,9 +77,105 @@ const userWithOrder = await Users.createOne({
                     }
                 }
             ]
-        }
+        },
+        /* --> other aliases can be used here, to associate the User node with those of other Models */
     }
 });
+
+console.log(userWithOrder.id); // '1'
+```
+
+### Creating many nodes
+For creating many nodes, the function `createMany` can be used, with identical parameters as `createOne`, with the only difference that the first param is an array of objects, instead of a plain object.
+```js
+const usersWithOrders = await Users.createMany(
+    [
+        {
+            id: '1',
+            name: 'John',
+        },
+        {
+            id: '2',
+            name: 'Alex',
+            [Users.getRelationshipCreationKeys().RelatedNodesToAssociate]: {
+                /* --> same interface as createOne, which will apply only to this node */
+            }
+        }
+    ],
+    {
+        /* --> (optional, default true) validates all nodes */
+        validate: true,
+        /* --> (optional) */
+        session: null,
+    }
+);
+
+console.log(usersWithOrders[0].id); // '1'
+console.log(usersWithOrders[1].bar()); // 'The name of this user is: Alex'
+```
+
+### Creating relationships via the Model static
+Relationships can be created via a Model static, by specifying params for both source and target nodes.
+
+The following example created a relationship with the configuration of the alias `Orders` between the User nodes with name `'John'` and the Order nodes with the id `'2'`.
+
+```js
+await Users.relateTo(
+    {
+        /* --> the alias of the relationship, as provided in the Model definition */
+        alias: 'Orders',
+        /* --> where parameters for the source and target nodes. Refer to the Where section for more information */
+        where: {
+            /* --> where parameters for the source node(s) */
+            source: {
+                name: 'John'
+            },
+            /* --> where parameters for the target node(s) */
+            target: {
+                id: '2',
+            },
+        },
+        /* --> properties of the relationship to be created */
+        values: {
+            createdAt: '2020-02-02'
+        }
+    },
+    {
+        /* --> (optional) throws an error if the created relationships are not equal to this number */
+        assertCreatedRelationships: 2,
+        /* --> (optional) */
+        session: null
+    }
+);
+```
+
+### Creating relationships via the Instance method
+Relationships can be created via an Instance method, by specifying params for just the target nodes. The source node will always be the one that corresponds to the instance, and its primary key field must be set.
+
+The method `relateTo` is identical to the static, with the only difference being the `where` parameter, which now only refers to the target nodes.
+
+```js
+/* --> let 'user' be a Users instance */
+await user.relateTo(
+    {
+        /* --> the alias of the relationship, as provided in the Model definition */
+        alias: 'Orders',
+        /* --> where parameters for target node(s) */
+        where: {
+            id: '2',
+        },
+        /* --> properties of the relationship to be created */
+        values: {
+            createdAt: '2020-02-02'
+        }
+    },
+    {
+        /* --> (optional) throws an error if the created relationships are not equal to this number */
+        assertCreatedRelationships: 2,
+        /* --> (optional) */
+        session: null
+    }
+);
 ```
 
 > :ToCPrevNext
