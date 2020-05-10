@@ -6,3 +6,4 @@
 > [Creating a Model](/docs/Models/Defining-a-Model)
 > [Instances](/docs/Models/Instances)
 > [Creating Nodes and Relationships](/docs/Models/Creating-Nodes-and-Relationships)
+> [Merging Nodes and Relationships](/docs/Models/Merging-Nodes-And-Relationships)

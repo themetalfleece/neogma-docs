@@ -36,7 +36,7 @@ const userWithOrder = await Users.createOne({
         /* --> the Orders alias will be used, as defined in the Users model */
         Orders: {
             /* --> (optional) create new nodes and associate with them */
-            properties: [
+            attributes: [
                 /* --> creates the following 2 Order nodes, and creates a relationship with each one of them using the configuration of the Orders alias  */
                 {
                     id: '2'
@@ -52,7 +52,7 @@ const userWithOrder = await Users.createOne({
                     [Orders.getRelationshipCreationKeys().RelatedNodesToAssociate]: {
                         /* --> the 'Critics' alias will be used, as defined in the 'Orders' model */
                         Critics: {
-                            properties: [{ id: '10' }]
+                            attributes: [{ id: '10' }]
                         }
                     }
                 }
@@ -65,7 +65,7 @@ const userWithOrder = await Users.createOne({
                     params: {
                         id: '3'
                     },
-                    /* --> properties can be added to the relationship created by matching the User node with the existing Order nodes */
+                    /* --> (optional) properties can be added to the relationship created by matching the User node with the existing Order nodes */
                     [Users.getRelationshipCreationKeys().RelationshipValuesToCreate]: {
                         createdAt: '2020-01-01',
                     }

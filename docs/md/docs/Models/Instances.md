@@ -4,7 +4,7 @@ Each Instance of a Model represents a node in the database, with its label, prop
 
 Instances offer flexible access to a node's properties, as well as operations regarding it, such as updating/deleting the node itself and its relationships.
 
-### Creating an Instance
+### Creating and saving an Instance
 TODO link to Create, Find
 An Instance is returned from various Model operations (such as Create, Find), or a new Instance (which doesn't yet exist in the database) can be created as follows:
 ```js
@@ -34,6 +34,9 @@ An Instance is returned from various Model operations (such as Create, Find), or
         validate: false,
     });
 ```
+
+**WARNING**: Updating a instance ignores its `RelatedNodesToAssociate` field (as described below) meaning that related nodes will not be created and associated. Only the initial `save` (when an instance doesn't yet exist in the database) creates associates related nodes.
+
 ### Accessing the Instance's properties and methods
 ```js
     /* --> the Instance's properties and methods are accessible by their key */
@@ -44,7 +47,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
     console.log(user.bar()); // 'The name of this user is: Alex'
 ```
 
-### Validating the Instance
+### Validating an Instance
 ```js
     user.age = 30;
     /* --> we can validate the properties of the Instance without saving it to the database. The properties of the Instance are valid, so this will not throw an error */
@@ -70,7 +73,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
             /* --> the 'Orders' alias will be used, as defined in the 'Users' model */
             Orders: {
                 /* --> (optional) create new nodes and associate with them */
-                properties: [{
+                attributes: [{
                     /* --> a new Order node will be created with the following properties, and a relationship with the configuration of alias 'Orders' will be created (direction: out, name: CREATES) */
                     id: '3'
                 }],
