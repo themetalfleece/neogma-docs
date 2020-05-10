@@ -4,7 +4,7 @@ Each Instance of a Model represents a node in the database, with its label, prop
 
 Instances offer flexible access to a node's properties, as well as operations regarding it, such as updating/deleting the node itself and its relationships.
 
-### Creating and saving an Instance
+## Creating and saving an Instance
 TODO link to Create, Find
 An Instance is returned from various Model operations (such as Create, Find), or a new Instance (which doesn't yet exist in the database) can be created as follows:
 ```js
@@ -24,7 +24,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
     });
 ```
 
-### Updating an Instance
+## Updating an Instance
 ```js
     /* --> given a user Instance, like the one created above, we can change the properties of the Instance */
     user.name = 'Alex';
@@ -37,7 +37,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
 
 **WARNING**: Updating a instance ignores its `RelatedNodesToAssociate` field (as described below) meaning that related nodes will not be created and associated. Only the initial `save` (when an instance doesn't yet exist in the database) creates associates related nodes.
 
-### Accessing the Instance's properties and methods
+## Accessing the Instance's properties and methods
 ```js
     /* --> the Instance's properties and methods are accessible by their key */
     console.log(user.id, user.name, user.age); // '1' 'Alex' 38
@@ -47,7 +47,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
     console.log(user.bar()); // 'The name of this user is: Alex'
 ```
 
-### Validating an Instance
+## Validating an Instance
 ```js
     user.age = 30;
     /* --> we can validate the properties of the Instance without saving it to the database. The properties of the Instance are valid, so this will not throw an error */
@@ -62,7 +62,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
     }
 ```
 
-### Creating related nodes
+## Creating related nodes
 ```js
     TODO add a link to Create operations
     /* --> by using the RelatedNodesToAssociate key specified in the Model definition, related nodes can also be created. For more examples, refer to the Create operations, as the same interface is used */
@@ -84,7 +84,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
     await userWithOrder.save();
 ```
 
-### More Instance methods
+## More Instance methods
 More Instance methods are found at the corresponding documentation, i.e. [Creating Nodes and Relationships](./Creating-Nodes-and-Relationships)
 
 > :ToCPrevNext

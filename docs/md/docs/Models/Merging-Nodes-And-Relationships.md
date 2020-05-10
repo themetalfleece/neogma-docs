@@ -2,7 +2,7 @@
 
 Merging nodes and relationships happens with the same functions as creating nodes and relationships, by passing the appropriate params. Therefore, it is recommended that [Creating Nodes and Relationships](./Creating-Nodes-and-Relationships) is known well.
 
-### Merging a single or many nodes of a Model
+## Merging a single or many nodes of a Model
 
 For merging a single node, `createOne` can be used with the `merge` param set to true.
 ```js
@@ -55,7 +55,7 @@ console.log(usersWithOrders[0].id); // '1'
 console.log(usersWithOrders[1].bar()); // 'The name of this user is: Alex'
 ```
 
-### Creating/Merging nodes and merging relationships with other nodes
+## Creating/Merging nodes and merging relationships with other nodes
 
 When automatically associating with other nodes (either by creating them or by matching them), a MERGE instead of a CREATE can be used.
 
@@ -148,3 +148,5 @@ const usersWithOrders = await Users.createMany(
     }
 );
 ```
+
+> :ToCPrevNext

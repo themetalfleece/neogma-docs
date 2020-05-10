@@ -1,6 +1,6 @@
 # Defining a Model
 
-### Using ModelFactory
+## Using ModelFactory
 To define a Model, the information presented at [Overview](./Overview) must be provided.
 
 For the schema, [revalidator](https://github.com/flatiron/revalidator) is used. Its documentation is applied as-is for defining validating the properties of the nodes of this Model.
@@ -176,7 +176,7 @@ A sample Model definition with all configuration options is the following. Note 
 > > }, neogma); // <-- the neogma instance is used
 > > ```
 
-### Using the Model's helpers
+## Using the Model's helpers
 The created Model provides functions for database operations, as well as the following helpers
 ```js
     /* --> gets the relationshipCreationKeys provided when defining the Model */

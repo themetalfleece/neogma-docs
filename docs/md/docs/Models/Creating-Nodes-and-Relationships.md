@@ -2,7 +2,7 @@
 
 Apart from building and saving an [Instance](./Instances), each model provides functions to directly create nodes and relationships.
 
-### Creating or a single node of the Model
+## Creating or a single node of the Model
 ```js
 /* --> create a User node and get the Instance */
 const user = await Users.createOne(
@@ -24,7 +24,7 @@ const user = await Users.createOne(
 console.log(user.name); // 'John'
 ```
 
-### Creating a single node of the Model while relating it with other nodes
+## Creating a single node of the Model while relating it with other nodes
 TODO link where
 Neogma provides functionality for creating other nodes while creating a given node, and associating them automatically. Instead of creating the associated nodes, they can also be matched by a where clause. Everything runs in a single statement.
 ```js
@@ -85,7 +85,7 @@ const userWithOrder = await Users.createOne({
 console.log(userWithOrder.id); // '1'
 ```
 
-### Creating many nodes
+## Creating many nodes
 For creating many nodes, the function `createMany` can be used, with identical parameters as `createOne`, with the only difference that the first param is an array of objects, instead of a plain object.
 ```js
 const usersWithOrders = await Users.createMany(
@@ -114,7 +114,7 @@ console.log(usersWithOrders[0].id); // '1'
 console.log(usersWithOrders[1].bar()); // 'The name of this user is: Alex'
 ```
 
-### Creating relationships via the Model static
+## Creating relationships via the Model static
 Relationships can be created via a Model static, by specifying params for both source and target nodes.
 
 The following example created a relationship with the configuration of the alias `Orders` between the User nodes with name `'John'` and the Order nodes with the id `'2'`.
@@ -149,7 +149,7 @@ await Users.relateTo(
 );
 ```
 
-### Creating relationships via the Instance method
+## Creating relationships via the Instance method
 Relationships can be created via an Instance method, by specifying params for just the target nodes. The source node will always be the one that corresponds to the instance, and its primary key field must be set.
 
 The method `relateTo` is identical to the static, with the only difference being the `where` parameter, which now only refers to the target nodes.
