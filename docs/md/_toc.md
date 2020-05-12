@@ -10,3 +10,5 @@
 > [Updating Nodes and Relationships](/docs/Models/Updating-Nodes-and-Relationships)
 > [Deleting Nodes](/docs/Models/Deleting-Nodes)
 > [Finding Nodes](/docs/Models/Finding-Nodes)
+
+[Sessions](/docs/Sessions)

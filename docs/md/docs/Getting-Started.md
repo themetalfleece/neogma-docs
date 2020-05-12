@@ -12,7 +12,7 @@ const neogma = new Neogma(
         password: 'neo4j connection password',
     },
     {
-        logger: console.log, // --> or any function for logging
+        logger: console.log, // --> logs every query that Neogma runs, using the given function
     }
 );
 ```
