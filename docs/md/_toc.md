@@ -1,5 +1,6 @@
 [Home](/)
 [Getting Started](/docs/Getting-Started)
+
 > :Collapse label=Models
 > 
 > [Overview](/docs/Models/Overview)
@@ -12,3 +13,8 @@
 > [Finding Nodes](/docs/Models/Finding-Nodes)
 
 [Sessions](/docs/Sessions)
+
+> :Collapse label=Query Runner
+> 
+> [Overview](/docs/QueryRunner/Overview)
+> [Running Arbitrary Queries](/docs/QueryRunner/Running-Arbitrary-Queries)

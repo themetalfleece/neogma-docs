@@ -37,40 +37,55 @@ A session can also be obtained with the `getSession` helper. Its first parameter
 
 After the callback is done, the session automatically closes.
 ```js
-/* --> no session is passed, so a new one will be created */
-await getSession(null, async (session) => {
-    /* --> this session can be used in more than one Neogma operations */
-    await Users.createOne(
-        {
-            id: '1',
-            name: 'John'
-        },
-        {
-            session
-        }
-    );
+await getSession(
+    /* --> no session is passed, so a new one will be created */
+    null, 
+    async (session) => {
+        /* --> this session can be used in more than one Neogma operations */
+        await Users.createOne(
+            {
+                id: '1',
+                name: 'John'
+            },
+            {
+                session
+            }
+        );
 
-    /* --> let's create a function that takes a session param */
-    const myFindUser = (sessionParam) => {
-        /* --> this param is used for a getSession. So, if it already exists, it will be used. Else, a new one will be created */
-        await getSession(sessionParam, async (sessionToUse) => {
-            /* --> we can perform multiple operations with this session */
-            await Users.findAll({
-                session: sessionToUse
-            });
-            await Users.findOne({
-                session: sessionToUse
-            });
-            await queryRunner.run(sessionToUse, 'MATCH 1 = 1', {});
-        });
-    };
+        /* --> let's create a function that takes a session param */
+        const myFindUser = (sessionParam) => {
+            /* --> this param is used for a getSession. So, if it already exists, it will be used. Else, a new one will be created */
+            await getSession(sessionParam, async (sessionToUse) => {
+                /* --> we can perform multiple operations with this session */
+                await Users.findAll({
+                    session: sessionToUse
+                });
+                await Users.findOne({
+                    session: sessionToUse
+                });
+                await queryRunner.run(sessionToUse, 'MATCH 1 = 1', {});
+            }, driver);
+        };
 
-    /* --> no session is given, so the operations in 'myFindUser' will run in their own session */
-    await myFindUser(null);
-    /* --> the existing session is given, so the operations in 'myFindUser' will run using this existing session */
-    await myFindUser(session);
-});
+        /* --> no session is given, so the operations in 'myFindUser' will run in their own session */
+        await myFindUser(null);
+        /* --> the existing session is given, so the operations in 'myFindUser' will run using this existing session */
+        await myFindUser(session);
+    },
+    /* --> a neo4j driver is needed */
+    driver
+);
 ```
 As we can see, this helper is useful when we have to run multiple operations in a single session, but we want to easily allow an existing session to be used.
+
+A `neogma` instance also provides a wrapper of this function, with the last parameter (the driver) being omitted.
+```js
+const getSession = neogma.getSession;
+await getSession(null, async (session) => {
+    await Users.findOne({
+        session
+    });
+});
+```
 
 > :ToCPrevNext
