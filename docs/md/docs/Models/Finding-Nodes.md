@@ -21,10 +21,10 @@ const users = await Users.findMany({
     session: null,
 });
 
-console.log(users[0].bar()); // 'The name of this user is: John'
-console.log(users[0].age, users[0].id); // 45 '2'
-console.log(users[1].age, users[1].id); // 45 '3'
-console.log(users[2].age, users[2].id); // 38 '1'
+console.log(users[0].bar()); // "The name of this user is: John"
+console.log(users[0].age, users[0].id); // 45 "2"
+console.log(users[1].age, users[1].id); // 45 "3"
+console.log(users[2].age, users[2].id); // 38 "1"
 ```
 
 ## Finding a single Node
@@ -43,8 +43,8 @@ const user = await Users.findOne({
     session: null,
 });
 
-console.log(user.bar()); // 'The name of this user is: John'
-console.log(user.id, user.age); // '1' 38
+console.log(user.bar()); // "The name of this user is: John"
+console.log(user.id, user.age); // "1" 38
 ```
 
 > :ToCPrevNext

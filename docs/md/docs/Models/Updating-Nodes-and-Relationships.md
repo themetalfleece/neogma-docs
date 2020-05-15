@@ -28,7 +28,7 @@ const result = await Users.update(
 
 /* --> ONLY if 'return' is set to true. The Instances of the matched and updated nodes. If 'return' is set to false, this will be an empty array */
 const instances = result[0];
-console.log(instances[0].name); // 'Bob'
+console.log(instances[0].name); // "Bob"
 
 /* --> the QueryResult from the neo4j driver */
 const queryResult = result[1];

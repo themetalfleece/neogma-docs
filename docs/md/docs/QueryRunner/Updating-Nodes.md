@@ -24,7 +24,7 @@ const result = await queryRunner.update(
                 }
             }
         },
-        /* --> (optional) the identifier of the nodes for the query. Is needed for parsing the results. Default is the value of 'QueryRunner.defaultIdentifier' */
+        /* --> (optional) the identifier of the nodes for the query. Is needed for parsing the results. Default is the value of 'QueryRunner.identifiers.default' */
         identifier: 'u',
         /* --> (optional) whether to return the nodes */
         return: true

@@ -21,7 +21,7 @@ const user = await Users.createOne(
 );
 
 /* --> we can use the Instance as usual */
-console.log(user.name); // 'John'
+console.log(user.name); // "John"
 ```
 
 ## Creating a single node of the Model while relating it with other nodes
@@ -82,7 +82,7 @@ const userWithOrder = await Users.createOne({
     }
 });
 
-console.log(userWithOrder.id); // '1'
+console.log(userWithOrder.id); // "1"
 ```
 
 ## Creating many nodes
@@ -110,8 +110,8 @@ const usersWithOrders = await Users.createMany(
     }
 );
 
-console.log(usersWithOrders[0].id); // '1'
-console.log(usersWithOrders[1].bar()); // 'The name of this user is: Alex'
+console.log(usersWithOrders[0].id); // "1"
+console.log(usersWithOrders[1].bar()); // "The name of this user is: Alex"
 ```
 
 ## Creating relationships via the Model static

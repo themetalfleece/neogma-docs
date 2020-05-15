@@ -40,11 +40,11 @@ An Instance is returned from various Model operations (such as Create, Find), or
 ## Accessing the Instance's properties and methods
 ```js
     /* --> the Instance's properties and methods are accessible by their key */
-    console.log(user.id, user.name, user.age); // '1' 'Alex' 38
+    console.log(user.id, user.name, user.age); // "1" "Alex" 38
     /* --> all the instance properties can be taken as follows */
-    console.log(user.getDataValues()); // { id: '1', name: 'Alex', age: 38 }
+    console.log(user.getDataValues()); // { id: "1", name: "Alex", age: 38 }
     /* --> the methods, used in the Model definition can be used */
-    console.log(user.bar()); // 'The name of this user is: Alex'
+    console.log(user.bar()); // "The name of this user is: Alex"
 ```
 
 ## Validating an Instance

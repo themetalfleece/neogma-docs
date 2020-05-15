@@ -20,7 +20,7 @@ const result = await queryRunner.create(
                 age: 38,
             }
         ],
-        /* --> (optional) the identifier of the nodes for the query. Is needed for parsing the results. Default is the value of 'QueryRunner.defaultIdentifier' */
+        /* --> (optional) the identifier of the nodes for the query. Is needed for parsing the results. Default is the value of 'QueryRunner.identifiers.default' */
         identifier: 'u',
     }
 );

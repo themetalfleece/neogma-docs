@@ -15,7 +15,7 @@ const user = await Users.createOne({
     email: 'john@email.com'
 });
 
-console.log(user.name); // 'John'
+console.log(user.name); // "John"
 
 user.name = 'Jack';
 /* --> updates the node's name in the database */

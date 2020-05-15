@@ -19,7 +19,7 @@ const result = await queryRunner.delete(
                 }
             }
         },
-        /* --> (optional) the identifier of the nodes for the query. Is needed for parsing the results. Default is the value of 'QueryRunner.defaultIdentifier' */
+        /* --> (optional) the identifier of the nodes for the query. Is needed for parsing the results. Default is the value of 'QueryRunner.identifiers.default' */
         identifier: 'u',
         /* --> (optional) adds the DETACH keyword to the delete statement, also deleting the relationships of the node(s) */
         detach: true,

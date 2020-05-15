@@ -25,7 +25,7 @@ const user = await Users.createOne(
 );
 
 /* --> we can use the Instance as usual */
-console.log(user.name); // 'John'
+console.log(user.name); // "John"
 ```
 
 For merging many nodes, `createMany` can be used with the `merge` param set to true.
@@ -51,8 +51,8 @@ const users = await Users.createMany(
     }
 );
 
-console.log(usersWithOrders[0].id); // '1'
-console.log(usersWithOrders[1].bar()); // 'The name of this user is: Alex'
+console.log(usersWithOrders[0].id); // "1"
+console.log(usersWithOrders[1].bar()); // "The name of this user is: Alex"
 ```
 
 ## Creating/Merging nodes and merging relationships with other nodes

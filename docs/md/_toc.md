@@ -22,3 +22,4 @@
 > [Updating Nodes](/docs/QueryRunner/Updating-Nodes)
 > [Deleting Nodes](/docs/QueryRunner/Deleting-Nodes)
 > [Creating Relationships](/docs/QueryRunner/Creating-Relationships)
+> [Helpers](/docs/QueryRunner/Helpers)
