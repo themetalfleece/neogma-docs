@@ -20,3 +20,5 @@
 > [Running Arbitrary Queries](/docs/QueryRunner/Running-Arbitrary-Queries)
 > [Creating Nodes](/docs/QueryRunner/Creating-Nodes)
 > [Updating Nodes](/docs/QueryRunner/Updating-Nodes)
+> [Deleting Nodes](/docs/QueryRunner/Deleting-Nodes)
+> [Creating Relationships](/docs/QueryRunner/Creating-Relationships)

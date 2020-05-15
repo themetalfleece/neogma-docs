@@ -5,7 +5,7 @@ A `QueryRunner` instance can be used to run arbitrary/raw queries, by using the 
 ```js
 /* --> let 'queryRunner' be a QueryRunner instance and 'session' and already-created session */
 const result = await queryRunner.run(
-    /* --> a session that's created is the first param */
+    /* --> a session that's already created */
     session, 
     /* --> albitrary Cypher */
     `MATCH (u:Users) WHERE u.id = {id} RETURN u`,

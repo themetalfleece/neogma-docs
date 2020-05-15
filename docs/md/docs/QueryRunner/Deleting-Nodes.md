@@ -1,18 +1,13 @@
-# Updating Nodes
+# Deleting Nodes
 
-A `QueryRunner` instance can be used for editing nodes from Objects. The node properties to update, a optional label, and an optional where param are needed.
+A `QueryRunner` instance can be used for deleting nodes from Objects. A label and a where parameter can be used.
 
 ```js
 /* --> let 'queryRunner' be a QueryRunner instance and 'session' and already-created session */
-const result = await queryRunner.update(
+const result = await queryRunner.delete(
     /* --> a session that's already created */
     session,
     {
-        /* --> the matched nodes will be updated with the following values */
-        data: {
-            name: 'Alex',
-            age: 30,
-        },
         /* --> (optional) label(s) of the nodes to be matched. Multiple labels like 'User:Person' can also be used */
         label: 'User',
         /* --> (optional) the where clause for the nodes to be matched. A param object or a Where instance can be used TODO link Where */
@@ -26,13 +21,13 @@ const result = await queryRunner.update(
         },
         /* --> (optional) the identifier of the nodes for the query. Is needed for parsing the results. Default is the value of 'QueryRunner.defaultIdentifier' */
         identifier: 'u',
-        /* --> (optional) whether to return the nodes */
-        return: true
+        /* --> (optional) adds the DETACH keyword to the delete statement, also deleting the relationships of the node(s) */
+        detach: true,
     }
 );
 
-/* --> the result is the QueryResult from the neo4j driver. In case the nodes were returned, their properties can be retrieved */
-console.log(result.records.map((v) => v.get('u').properties));
+/* --> the result is the QueryResult from the neo4j driver */
+console.log(result.summary.counters.updates().nodesDeleted);
 ```
 
 > :ToCPrevNext

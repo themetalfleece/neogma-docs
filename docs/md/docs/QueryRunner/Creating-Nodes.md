@@ -4,8 +4,8 @@ A `QueryRunner` instance can be used for creating nodes from Objects. The node p
 
 ```js
 /* --> let 'queryRunner' be a QueryRunner instance and 'session' and already-created session */
-await queryRunner.create(
-    /* --> a session that's created */
+const result = await queryRunner.create(
+    /* --> a session that's already created */
     session,
     {
         /* --> label(s) of the created nodes. Multiple labels like 'User:Person' can also be used */
