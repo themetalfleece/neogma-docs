@@ -1,6 +1,6 @@
 # The Query Runner
 
-The `QueryRunner` class can be used for arbitrary Cypher or Object-Graph mapping, without the need of defining Models. The parameters need to provide information about the labels etc.
+The `QueryRunner` class can be used for arbitrary Cypher or Object-Graph mapping, without the need of defining Models. The parameters need to provide information about the labels etc. Bind parameters are used interally so there no need of escaping variables.
 
 It also provides some utilities to help with running your queries.
 

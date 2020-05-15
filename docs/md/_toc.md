@@ -18,3 +18,5 @@
 > 
 > [Overview](/docs/QueryRunner/Overview)
 > [Running Arbitrary Queries](/docs/QueryRunner/Running-Arbitrary-Queries)
+> [Creating Nodes](/docs/QueryRunner/Creating-Nodes)
+> [Updating Nodes](/docs/QueryRunner/Updating-Nodes)
