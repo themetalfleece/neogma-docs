@@ -151,7 +151,7 @@ console.log(newBindParam.get()); // { x: 5, y: 'bar', z: true, a: 1 }
 console.log(oldBindParam.get()); // { x: 5, y: 'bar', z: true, b: 2 }
 ```
 
-## Acquire a BindParam
+## Acquire a BindParam instance
 
 The `acquire` static can be used to ensure that a BindParam instance is at hand. If one is passed, it will be returned as is. Else, a new one will be created.
 

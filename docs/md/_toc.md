@@ -25,3 +25,5 @@
 > [Helpers](/docs/QueryRunner/Helpers)
 
 [Bind Parameters](/docs/Bind-Parameters)
+
+[Where Parameters](/docs/Where-Parameters)
