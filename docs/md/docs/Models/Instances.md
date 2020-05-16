@@ -5,8 +5,7 @@ Each Instance of a Model represents a node in the database, with its label, prop
 Instances offer flexible access to a node's properties, as well as operations regarding it, such as updating/deleting the node itself and its relationships.
 
 ## Creating and saving an Instance
-TODO link to Create, Find
-An Instance is returned from various Model operations (such as Create, Find), or a new Instance (which doesn't yet exist in the database) can be created as follows:
+An Instance is returned from various Model operations (such as [Create](./Creating-Nodes-and-Relationships), [Find](./Finding-Nodes)), or a new Instance (which doesn't yet exist in the database) can be created as follows:
 ```js
     /* --> creates an Instance of the Users model, which still doesn't exist in the database */
     const user = Users.build({
@@ -19,7 +18,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
     await user.save({
         /* --> (optional, default true) validates that the properties of the Instance are valid, given the schema of the Model definition */
         validate: true,
-        /* --> (optional) a session object for this query to run. If empty/null, a new session will be created TODO see more for session */
+        /* --> (optional) a session object for this query to run. If empty/null, a new session will be created */
         session: null,
     });
 ```
@@ -64,8 +63,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
 
 ## Creating related nodes
 ```js
-    TODO add a link to Create operations
-    /* --> by using the RelatedNodesToAssociate key specified in the Model definition, related nodes can also be created. For more examples, refer to the Create operations, as the same interface is used */
+    /* --> by using the RelatedNodesToAssociate key specified in the Model definition, related nodes can also be created */
     const userWithOrder = Users.build({
         id: '2',
         name: 'Alex',
@@ -83,6 +81,7 @@ An Instance is returned from various Model operations (such as Create, Find), or
     /* --> when calling the following method, the User node, the Order node and the relationship between them */
     await userWithOrder.save();
 ```
+For more examples of creating realted nodes, refer to the [Create operations](./Creating-Nodes-and-Relationships), as the same interface is used
 
 ## More Instance methods
 More Instance methods are found at the corresponding documentation, i.e. [Creating Nodes and Relationships](./Creating-Nodes-and-Relationships)

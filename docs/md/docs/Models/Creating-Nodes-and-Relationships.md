@@ -15,8 +15,8 @@ const user = await Users.createOne(
     {
         /* --> (optional, default true) validates the properties of the node */
         validate: true,
-        /* --> (optional) a session object for this query to run. If empty/null, a new session will be created TODO see more for session */
-        session: null,
+        /* --> (optional) a session object for this query to run. If empty/null, a new session will be created */
+        session: null, // @see [Sessions](../Sessions)
     }
 );
 
@@ -25,8 +25,7 @@ console.log(user.name); // "John"
 ```
 
 ## Creating a single node of the Model while relating it with other nodes
-TODO link where
-Neogma provides functionality for creating other nodes while creating a given node, and associating them automatically. Instead of creating the associated nodes, they can also be matched by a where clause. Everything runs in a single statement.
+Neogma provides functionality for creating other nodes while creating a given node, and associating them automatically. Instead of creating the associated nodes, they can also be matched by a [where clause](../Where-Parameters). Everything runs in a single statement.
 ```js
 const userWithOrder = await Users.createOne({
     id: '1',
@@ -60,9 +59,8 @@ const userWithOrder = await Users.createOne({
             /* --> (optional) also associates the User node with existing Order nodes */
             where: [
                 {
-                    // TODO link to Where
                     /* --> the Where clause find matching the existing Nodes */
-                    params: {
+                    params: { // @see [Where](../Where-Parameters)
                         id: '3'
                     },
                     /* --> (optional) properties can be added to the relationship created by matching the User node with the existing Order nodes */

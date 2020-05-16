@@ -15,8 +15,8 @@ const result = await queryRunner.update(
         },
         /* --> (optional) label(s) of the nodes to be matched. Multiple labels like 'User:Person' can also be used */
         label: 'User',
-        /* --> (optional) the where clause for the nodes to be matched. A param object or a Where instance can be used TODO link Where */
-        where: {
+        /* --> (optional) the where clause for the nodes to be matched. A param object or a Where instance can be used */
+        where: { // @see [Where](../Where-Parameters)
             /* --> the identifier needs to be used as a key */
             u: {
                 id: {

@@ -25,9 +25,8 @@ await Users.createOne(
 await Users.findAll({
     session
 });
-// TODO link QueryRunner
 /* --> the session can also be used in the QueryRunner. Let 'queryRunner' be a QueryRunner instance */
-await queryRunner.run(session, 'MATCH 1 = 1', {});
+await queryRunner.run(session, 'MATCH 1 = 1', {}); // @see [QueryRunner](./QueryRunner/Overview)
 /* --> closing the session */
 await session.close();
 ```

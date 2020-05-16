@@ -1,7 +1,6 @@
 # Models Overview
 
-TODO link Instance
-Models provide lots of functions to automate creating, reading, updating, and deleting nodes and relationships. Every time a node is created or fetched from the database, an Instance of this Model is created and provides access to its properties and other helper methods.
+Models provide lots of functions to automate creating, reading, updating, and deleting nodes and relationships. Every time a node is created or fetched from the database, an [Instance](./Instances) of this Model is created and provides access to its properties and other helper methods.
 
 To provide that functionality, a model definition needs the following configuration:
 * The label(s) that the nodes have.

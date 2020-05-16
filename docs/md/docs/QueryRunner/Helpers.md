@@ -63,7 +63,6 @@ console.log(getRelationshipDirectionAndName({
 ## Getting parts for a SET operation
 `QueryRunner.getSetParts` returns the parts and the statement for a SET operation.
 ```js
-// TODO import BindParam
 const { getSetParts } = QueryRunner;
 
 const existingBindParam = new BindParam({});
@@ -74,7 +73,7 @@ const result = getSetParts({
         y: 'foo'
     },
     /* --> BindParam instance to be used */
-    bindParam: existingBindParam, // TODO link BindParam
+    bindParam: existingBindParam, // @see [Bind Paramters](../Bind-Parameters)
     /* --> the identifier to use */
     identifier: 'node'
 });

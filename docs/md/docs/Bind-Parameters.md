@@ -6,7 +6,6 @@ The `BindPara` class provides utilities of easily creating a bind parameters obj
 
 First of all, a `BindParam` instance must be created.
 ```js
-// TODO import BindParam
 /* --> creating an empty BindParam instance */
 const bindParam = new BindParam();
 

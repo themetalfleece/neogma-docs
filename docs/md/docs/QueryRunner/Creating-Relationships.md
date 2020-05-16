@@ -30,8 +30,8 @@ const result = await queryRunner.createRelationship(
                 createdAt: '2020-02-02'
             }
         },
-        /* --> (optional) the where clause for the source and target nodes to be matched. A param object or a Where instance can be used. The source/target identifiers needs to be used as keys TODO link Where */
-        where: {
+        /* --> (optional) the where clause for the source and target nodes to be matched. A param object or a Where instance can be used. The source/target identifiers needs to be used as keys */
+        where: { // @see [Where](../Where-Parameters)
             /* --> where params for the source Node. The source identifier needs to be used as a key */
             source: {
                 id: {

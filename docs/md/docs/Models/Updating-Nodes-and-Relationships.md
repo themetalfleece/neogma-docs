@@ -4,8 +4,7 @@ Apart from saving an existing [Instance](./Instances), each model provides funct
 
 ## Updating Nodes
 
-TODO link to Where
-Nodes can be updated directly by providing the properties to be set, and a where parameter to match the nodes.
+Nodes can be updated directly by providing the properties to be set, and a [where parameter](../Where-Parameters) to match the nodes.
 
 ```js
 const result = await Users.update(

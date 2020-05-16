@@ -57,10 +57,8 @@ const order = await Orders.findOne({
 
 console.log(order.status); // confirmed
 ```
-TODO link model
-All of the above run in a single statement for max performance. The association alias (here `Orders`) is defined in the model along with the relationship name, direction and properties.
+All of the above run in a single statement for max performance. The association alias (here `Orders`) is defined in the [Model](./docs/Models/Overview) along with the relationship name, direction and properties.
 
-TODO link bind param, QueryRunner
-All the user-specified values are automatically used in the query with bind parameters. Neogma also offers helpers to easily create your own queries with generated where clauses and bind parameters.
+All the user-specified values are automatically used in the query with [bind parameters](./docs/Bind-Parameters). Neogma also offers [helpers to easily create your own queries](./docs/QueryRunner/Overview) with generated where clauses and bind parameters.
 
 > :ToCPrevNext

@@ -10,7 +10,6 @@ A sample Model definition with all configuration options is the following. Note 
 > :Tabs
 > > :Tab title=Javascript
 > > ```js
-> > // TODO import ModelFactory
 > > const Users = ModelFactory({
 > >     /* --> the label that the nodes of this Model have. For multiple nodes, an array can be provided like ['User', 'New'] */
 > >     label: 'User',
@@ -70,7 +69,6 @@ A sample Model definition with all configuration options is the following. Note 
 >
 > > :Tab title=Typescript
 > > ```ts
-> > // TODO import ModelFactory, ModelRelatedNodes, NeogmaInstance
 > > 
 > > /* --> the interface of the attributes of the Instance (properties of the node). They match the schema definition */
 > > interface UserAttributesI {
