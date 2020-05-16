@@ -4,14 +4,14 @@ import { theme } from './theme';
 
 export const config = /*#__PURE__*/configuration({
   theme, // --> add the theme. modify `./theme.ts` for chaning the theme.
-
   page: {
     title: {
       base: 'Neogma Docs' // --> the base title of your doc pages
     },
   },
   dest: {
-    html: 'docs'
+    html: 'docs',
+    namespace: '/neogma-docs'
   },
   misc: {
     github: {
@@ -20,5 +20,4 @@ export const config = /*#__PURE__*/configuration({
       action: 'Star',
     }
   }
-
 });
