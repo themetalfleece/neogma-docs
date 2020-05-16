@@ -9,9 +9,12 @@ export const config = /*#__PURE__*/configuration({
       base: 'Neogma Docs' // --> the base title of your doc pages
     },
   },
+  src: {
+    base: './md'
+  },
   dest: {
-    html: 'docs',
-    namespace: '/neogma-docs'
+    html: '.',
+    namespace: '/neogma-docs',
   },
   misc: {
     github: {
