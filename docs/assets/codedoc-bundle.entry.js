@@ -12,6 +12,7 @@ import { loadDeferredIFrames } from 'C:/Users/jason/Documents/Projects/thesis/ne
 import { smoothLoading } from 'C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/transport/smooth-loading.js';smoothLoading();
 import { tocHighlight } from 'C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/components/page/toc/toc-highlight.js';tocHighlight();
 import { postNavSearch } from 'C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/components/page/toc/search/post-nav/index.js';postNavSearch();
+import { openToCOnDesktopByDefault } from 'C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/desktop-toc-open.ts';openToCOnDesktopByDefault();
 import { ToCPrevNext } from 'C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/components/page/toc/prevnext/index.js';
 import { CollapseControl } from 'C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/components/collapse/collapse-control.js';
 import { GithubSearch } from 'C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/components/misc/github/search.js';

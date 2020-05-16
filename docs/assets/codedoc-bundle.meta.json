@@ -64,6 +64,11 @@
       "name": "postNavSearch",
       "filename": "C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/components/page/toc/search/post-nav/index.js",
       "hash": "NJkKYCpAVLkNkwX0u6OYkg=="
+    },
+    {
+      "name": "openToCOnDesktopByDefault",
+      "filename": "C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/desktop-toc-open.ts",
+      "hash": "VIF/fIlt2EsJBLMcxAFc3w=="
     }
   ],
   "components": [

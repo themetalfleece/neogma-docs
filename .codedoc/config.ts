@@ -1,4 +1,5 @@
-import { configuration } from '@codedoc/core';
+import { DefaultConfig, configuration } from '@codedoc/core';
+import { openToCOnDesktopByDefault$ } from './desktop-toc-open';
 
 import { theme } from './theme';
 
@@ -22,5 +23,11 @@ export const config = /*#__PURE__*/configuration({
       user: 'themetalfleece',
       action: 'Star',
     }
+  },
+  bundle: {
+    init: [
+      ...DefaultConfig.bundle.init,
+      openToCOnDesktopByDefault$,
+    ]
   }
 });
