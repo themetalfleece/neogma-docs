@@ -26,7 +26,7 @@ await Users.findAll({
     session
 });
 /* --> the session can also be used in the QueryRunner. Let 'queryRunner' be a QueryRunner instance */
-await queryRunner.run(session, 'MATCH 1 = 1', {}); // @see [QueryRunner](./QueryRunner/Overview)
+await queryRunner.run(session, 'RETURN 1 = 1', {}); // @see [QueryRunner](./QueryRunner/Overview)
 /* --> closing the session */
 await session.close();
 ```
@@ -62,7 +62,7 @@ await getSession(
                 await Users.findOne({
                     session: sessionToUse
                 });
-                await queryRunner.run(sessionToUse, 'MATCH 1 = 1', {});
+                await queryRunner.run(sessionToUse, 'RETURN 1 = 1', {});
             }, driver);
         };
 

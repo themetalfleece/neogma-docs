@@ -101,18 +101,18 @@ A sample Model definition with all configuration options is the following. Note 
 > >      >
 > > }
 > >
-> > /* --> the type of the Instance of this Model. Its generics are interfaces that are defined in this file */
-> > type UsersInstance = NeogmaInstance<typeof Users, UserAttributesI, UsersRelatedNodesI>;
+> > /* --> (optional) types for the methods of the Instance. This has to be defined only if methods are used */
+> > interface MethodsI {
+> >     bar: () => string
+> > }
 > >
 > > /* --> (optional) types for the statics of the Model. This has to be defined only if statics are used */
 > > interface StaticsI {
 > >     foo: () => bar
 > > }
 > >
-> > /* --> (optional) types for the methods of the Instance. This has to be defined only if methods are used */
-> > interface MethodsI {
-> >     bar: () => string
-> > }
+> > /* --> the type of the Instance of this Model. Its generics are interfaces that are defined in this file */
+> > type UsersInstance = NeogmaInstance<UserAttributesI, UsersRelatedNodesI, MethodsI>;
 > >
 > > const Users = ModelFactory<
 > >     UserAttributesI,
@@ -173,6 +173,10 @@ A sample Model definition with all configuration options is the following. Note 
 > >     }
 > > }, neogma); // <-- the neogma instance is used
 > > ```
+> >
+
+> :Buttons
+> > :CopyButton
 
 ## Using the Model's helpers
 The created Model provides functions for database operations, as well as the following helpers
