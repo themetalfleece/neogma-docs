@@ -77,8 +77,8 @@ const result = getSetParts({
     /* --> the identifier to use */
     identifier: 'node'
 });
-console.log(result.parts); // ["node.x = {x}", "node.y = {y}"]
-console.log(result.statement); // "SET node.x = {x}, node.y = {y}"
+console.log(result.parts); // ["node.x = $x", "node.y = $y"]
+console.log(result.statement); // "SET node.x = $x, node.y = $y"
 console.log(bindParam.get()); // { x: 5, y: 'foo' }
 
 const existingBindParam = new BindParam({
@@ -92,8 +92,8 @@ const result = getSetParts({
     bindParam: existingBindParam,
     identifier: 'node'
 });
-console.log(result.parts); // ["node.x = {x__aaaa}", "node.y = {y}"]
-console.log(result.statement); // "SET node.x = {x__aaaa}, node.y = {y}"
+console.log(result.parts); // ["node.x = $x__aaaa", "node.y = $y"]
+console.log(result.statement); // "SET node.x = $x__aaaa, node.y = $y"
 console.log(bindParam.get()); // { x: 'irrelevant', x_aaaa: 5, y: 'foo' }
 ```
 

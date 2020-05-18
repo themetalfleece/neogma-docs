@@ -17,7 +17,7 @@ const where = new Where({
 });
 
 /* --> the "where" property has the statement to be used in the query */
-console.log(where.statement); // "n.x = {x} AND n.y = {y}"
+console.log(where.statement); // "n.x = $x AND n.y = $y"
 /* --> the "bindParam" property has a BindParam instance whose values can be used in the query */
 console.log(where.bindParam.get()); // { x: 5, y: 'bar' }
 ```
@@ -35,7 +35,7 @@ const where = new Where({
     }
 });
 
-console.log(where.statement); // "n.x = {x} AND n.y = {y} AND o.z = {z}"
+console.log(where.statement); // "n.x = $x AND n.y = $y AND o.z = $z"
 console.log(where.bindParam.get()); // { x: 5, y: 'bar', z: true }
 ```
 
@@ -53,7 +53,7 @@ const where = new Where({
     }
 });
 
-console.log(where.statement); // "n.x = {x} AND n.y = {y} AND o.x = {x__aaaa}"
+console.log(where.statement); // "n.x = $x AND n.y = $y AND o.x = $x__aaaa"
 console.log(where.bindParam.get()); // { x: 5, y: 'bar', x_aaaa: true }
 ```
 
@@ -76,7 +76,7 @@ const where = new Where(
 );
 
 /* --> the "x" key already exists in the bind param, so a new one is used */
-console.log(where.statement); // "n.x = {x__aaaa} AND n.y = {y}"
+console.log(where.statement); // "n.x = $x__aaaa AND n.y = $y"
 console.log(where.bindParam.get()); // { x: 4, x_aaaa: 5, y: 'bar' }
 console.log(where.bindParam === existingBindParam); // true
 ```
@@ -95,7 +95,7 @@ const existingWhere = new Where(
     }
 );
 
-console.log(existingWhere.statement); // "n.x = {x} AND o.z = {z}"
+console.log(existingWhere.statement); // "n.x = $x AND o.z = $z"
 console.log(existingWhere.bindParam.get()); // { x: 4, z: true }
 
 const newWhere = new Where(
@@ -110,7 +110,7 @@ const newWhere = new Where(
     existingWhere
 );
 
-console.log(newWhere.statement); // "n.x = {x} AND n.y = {y} AND o.z = {z} AND m.z = {z__aaaa}"
+console.log(newWhere.statement); // "n.x = $x AND n.y = $y AND o.z = $z AND m.z = $z__aaaa"
 console.log(newWhere.bindParam.get()); // { x: 4, y: 'bar', z: true, z__aaaa: 'foo' }
 ```
 
@@ -135,7 +135,7 @@ where.addParams({
     }
 });
 
-console.log(where.statement); // "n.x = {x} AND n.y = {y} AND n.z = {z} AND o.x = {x__aaaa}"
+console.log(where.statement); // "n.x = $x AND n.y = $y AND n.z = $z AND o.x = $x__aaaa"
 console.log(where.bindParam.get()); // { x: 5, y: 'bar', z: true, x__aaaa: 4 }
 ```
 
@@ -163,7 +163,7 @@ where.addParams(
     existingBindParam
 )
 
-console.log(where.statement); // "n.x = {x__aaaa} AND n.y = {y} AND n.z = {z}"
+console.log(where.statement); // "n.x = $x__aaaa AND n.y = $y AND n.z = $z"
 console.log(where.bindParam.get()); // { x: 4, x_aaaa: 5, y: 'bar', z: true }
 console.log(where.bindParam === existingBindParam); // true
 ```
@@ -183,7 +183,7 @@ const existingWhere = new Where(
     }
 );
 
-console.log(existingWhere.statement); // "n.x = {x} AND o.z = {z}"
+console.log(existingWhere.statement); // "n.x = $x AND o.z = $z"
 console.log(existingWhere.bindParam.get()); // { x: 4, z: true }
 
 const newWhere = new Where(
@@ -206,7 +206,7 @@ newWhere.addParams(
     existingWhere
 );
 
-console.log(newWhere.statement); // "n.x = {x} AND n.y = {y} AND n.a = {a} o.z = {z} AND m.z = {z__aaaa}"
+console.log(newWhere.statement); // "n.x = $x AND n.y = $y AND n.a = $a o.z = $z AND m.z = $z__aaaa"
 console.log(newWhere.bindParam.get()); // { x: 4, y: 'bar', a: 1, z: true, z__aaaa: 'foo' }
 ```
 
@@ -263,7 +263,7 @@ const whereWithBindParams = Where.acquire(
 );
 
 console.log(whereWithBindParams instanceof Where); // true
-console.log(whereWithBindParams.statement); // "n.x = {x__aaaa}"
+console.log(whereWithBindParams.statement); // "n.x = $x__aaaa"
 console.log(whereWithBindParams.bindParam.get()); // { x: 4, x__aaaa: 5 }
 ```
 

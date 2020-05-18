@@ -8,7 +8,7 @@ const result = await queryRunner.run(
     /* --> a session that's already created */
     session, 
     /* --> albitrary Cypher */
-    `MATCH (u:Users) WHERE u.id = {id} RETURN u`,
+    `MATCH (u:Users) WHERE u.id = $id RETURN u`,
     /* --> bind parameter for the statement */
     {
         id: '1'

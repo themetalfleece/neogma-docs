@@ -34,7 +34,7 @@ To get started, a Neogma instance needs to be initialized
 ```js
 const neogma = new Neogma(
     {
-        url: 'bolt://localhost',
+        url: 'bolt://localhost:7687',
         username: 'neo4j',
         password: 'password',
     },

@@ -27,7 +27,7 @@ const bindParam = new BindParam(
 );
 
 /* --> the following will throw an error since the keys are not unique. To add non-unique keys, the `getUniqueName` method must be used */
-/* --> this is to prevent unexpected behavior in a case like the following: "n1.x = {x}, n2.x = {x}", where a different value is intended to be used each time */
+/* --> this is to prevent unexpected behavior in a case like the following: "n1.x = $x, n2.x = $x", where a different value is intended to be used each time */
 const bindParam = new BindParam(
     {
         x: 5
@@ -96,7 +96,7 @@ const bindParam = new BindParam({
     y: 'bar'
 });
 /* --> let's suppose you use those keys in a query. The bindParam can be used as a parameter when we run it */
-let statement = `MATCH (n) WHERE n.x = {x} AND n.y = {y}`;
+let statement = `MATCH (n) WHERE n.x = $x AND n.y = $y`;
 
 /* --> get a unique key based on the 'x' prefix */
 const uniqueName = bindParam.getUniqueName('x');

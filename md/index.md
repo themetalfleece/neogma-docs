@@ -68,6 +68,8 @@ const createAndUpdateUser = async () => {
     /* --> updates the node's name in the database */
     await user.save();
     console.log(user.name); // 'Alex'
+
+    await neogma.getDriver().close();
 }
 
 createAndUpdateUser();
@@ -80,13 +82,14 @@ The Cypher which runs in `createAndUpdateUser` is the following:
 Statement: UNWIND {bulkCreateOptions} as bulkCreateData CREATE (bulkCreateNodes:`User`) SET bulkCreateNodes += bulkCreateData
 Parameters: { bulkCreateOptions: [ { name: 'John', age: 38, id: '1' } ] }
 
-Statement: MATCH (node:`User`) WHERE node.id = {id} SET node.name = {name}
+Statement: MATCH (node:`User`) WHERE node.id = $id SET node.name = $name
 Parameters: { id: '1', name: 'Jack' }
 ```
 
 Another feature is to associate the created nodes with other nodes, which will either be created now or by matched by a where clause. This supports infinite nesting for maximum flexibility.
 
 ```js
+/* --> create a User node, an Order node and a relationship between them */
 await Users.createMany([
     {
         id: '1',
@@ -123,7 +126,7 @@ console.log(order.status); // confirmed
 
 The cypher which runs in `Users.createMany` is the following:
 ```sql
-Statement: CREATE (node:`User`) SET node += {data} CREATE (node__aaaa:`Order`) SET node__aaaa += {data__aaaa} CREATE (node)-[:CREATES]->(node__aaaa) WITH DISTINCT node MATCH (targetNode:`Order`) WHERE targetNode.id = {id} CREATE (node)-[r:CREATES]->(targetNode)
+Statement: CREATE (node:`User`) SET node += $data CREATE (node__aaaa:`Order`) SET node__aaaa += $data__aaaa CREATE (node)-[:CREATES]->(node__aaaa) WITH DISTINCT node MATCH (targetNode:`Order`) WHERE targetNode.id = $id CREATE (node)-[r:CREATES]->(targetNode)
 
 Parameters: {
   data: { name: 'John', age: 38, id: '1' },
