@@ -103,12 +103,13 @@ A sample Model definition with all configuration options is the following. Note 
 > >
 > > /* --> (optional) types for the methods of the Instance. This has to be defined only if methods are used */
 > > interface MethodsI {
-> >     bar: () => string
+> >     /* --> 'this' needs to be cast as the Instance of this Model (in this example, it is defined a few lines below) */
+> >     bar: (this: UsersInstance) => string
 > > }
 > >
 > > /* --> (optional) types for the statics of the Model. This has to be defined only if statics are used */
 > > interface StaticsI {
-> >     foo: () => bar
+> >     foo: () => string
 > > }
 > >
 > > /* --> the type of the Instance of this Model. Its generics are interfaces that are defined in this file */
