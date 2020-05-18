@@ -8,6 +8,7 @@ export const config = /*#__PURE__*/configuration({
     title: {
       base: 'Neogma Docs' // --> the base title of your doc pages
     },
+    favicon: '/favicon.ico'
   },
   src: {
     base: './md'

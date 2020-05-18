@@ -1,9 +1,9 @@
-# neogma
+![neogma logo](https://themetalfleece.github.io/neogma-docs/docs/assets/images/logo-text-horizontal.svg)
+
+Object-Graph-Mapping neo4j framework, fully-typed with TypeScript, for easy and flexible node and relationship operations
 
 [![npm version](https://badgen.net/npm/v/neogma)](https://www.npmjs.com/package/neogma)
 [![types includes](https://badgen.net/npm/types/tslib)](https://www.typescriptlang.org/)
-
-Object-Graph-Mapping neo4j framework, fully-typed with TypeScript, for easy and flexible node and relationship operations
 
 ## Overview
 Neogma uses Model definitions to simplify and automate lots of operations. Alternatively, a query runner is also provided for running operations directly with Javascript object, without a Model definition.
