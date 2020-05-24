@@ -97,7 +97,32 @@ console.log(result.statement); // "SET node.x = $x__aaaa, node.y = $y"
 console.log(bindParam.get()); // { x: 'irrelevant', x_aaaa: 5, y: 'foo' }
 ```
 
+## Getting properties with query param values
+
+`QueryRunner` exposes a `getPropertiesWithParams` function which returns an object in a string format to be used in queries, while replacing its values with bind params.
+
+```js
+/* --> an existing BindParam instance, could have existing values */
+const bindParam = new BindParam({
+    x: 4,
+});
+const result = QueryRunner.getPropertiesWithParams(
+    /* --> the object to use */
+    {
+        x: 5,
+        y: 'foo'
+    },
+    /* --> an existing bindParam must be passed */
+    bindParam
+);
+
+/* --> the result gives us the needed object, while replacing its values with the appropriate bind param */
+console.log(result); // "{ x: $x__aaaa, y: $y }"
+console.log(bindParam.get()); // { x: 4, x__aaaa: 5, y: 'foo' }
+```
+
 ## Default QueryRunner identifiers
+
 `QueryRunner` exposes the default identifiers which are used in the queries.
 
 ```js
@@ -105,9 +130,9 @@ console.log(bindParam.get()); // { x: 'irrelevant', x_aaaa: 5, y: 'foo' }
 console.log(QueryRunner.identifiers.default);
 /* --> default identifiers for createRelationship */
 console.log(QueryRunner.createRelationship);
-/** default identifier for the source node */
+/* default identifier for the source node */
 console.log(QueryRunner.createRelationship.source);
-/** default identifier for the target node */
+/* default identifier for the target node */
 console.log(QueryRunner.createRelationship.target);
 ```
 

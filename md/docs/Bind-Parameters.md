@@ -112,7 +112,7 @@ console.log(bindParam.get()); // { x: 5, y: 'bar', x__aaaa: 4 }
 statement += `WITH n MATCH (o) WHERE o.x = $${uniqueName} RETURN n, o`;
 
 /* --> we can now run this query */
-await queryRunner.run(session, statement, bindParam.get());
+await queryRunner.run(statement, bindParam.get());
 ```
 
 The `getUniqueNameAndAdd` can be used to perform the `getUniqueName` and `add` methods at once.

@@ -226,7 +226,6 @@ const where = new Where({
 });
 
 await queryRunner.run(
-    session,
     `MATCH (n), (o) WHERE ${where.statement} RETURN n, o`,
     where.bindParam.get()
 );
