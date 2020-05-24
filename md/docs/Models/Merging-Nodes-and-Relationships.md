@@ -2,6 +2,11 @@
 
 Merging nodes and relationships happens with the same functions as creating nodes and relationships, by passing the appropriate params. Therefore, it is recommended that [Creating Nodes and Relationships](./Creating-Nodes-and-Relationships) is known well.
 
+* When merging nodes, their data is used for the merge operation
+  * i.e. `MERGE (u:User { id: '1' })`
+* When merging relationships, the merge is made on the source node, target node and relationship name, but the relationship properties get set afterwards
+  * i.e. `MERGE (u)-[r:CREATES]->(o) SET r.createdAt = '2020-02-02`
+
 ## Merging a single or many nodes of a Model
 
 For merging a single node, `createOne` can be used with the `merge` param set to true.
