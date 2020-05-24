@@ -14,7 +14,7 @@ await Users.delete({
     },
     /* --> (optional) adds the DETACH keyword to the delete statement, also deleting the relationships of the node(s) */
     detach: true,
-    /* --> (optional) */
+    /* --> (optional) an existing session or transaction to use */
     session: null,
 });
 ```
@@ -28,7 +28,7 @@ Using the `delete` method of an Instance, the node which corresponds to the Inst
 await user.delete({
     /* --> (optional) adds the DETACH keyword to the delete statement, also deleting the relationships of the node */
     detach: true,
-    /* --> (optional) */
+    /* --> (optional) an existing session or transaction to use */
     session: null,
 });
 ```

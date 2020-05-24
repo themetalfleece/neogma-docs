@@ -15,7 +15,7 @@ const user = await Users.createOne(
     {
         /* --> (optional, default true) validates the properties of the node */
         validate: true,
-        /* --> (optional) a session object for this query to run. If empty/null, a new session will be created */
+        /* --> (optional) an existing session or transaction to use */
         session: null, // @see [Sessions](../Sessions)
     }
 );
@@ -103,7 +103,7 @@ const usersWithOrders = await Users.createMany(
     {
         /* --> (optional, default true) validates all nodes */
         validate: true,
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null,
     }
 );
@@ -136,12 +136,10 @@ await Users.relateTo(
         /* --> properties of the relationship to be created */
         values: {
             createdAt: '2020-02-02'
-        }
-    },
-    {
+        },
         /* --> (optional) throws an error if the created relationships are not equal to this number */
         assertCreatedRelationships: 2,
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null
     }
 );
@@ -165,12 +163,10 @@ await user.relateTo(
         /* --> properties of the relationship to be created */
         values: {
             createdAt: '2020-02-02'
-        }
-    },
-    {
+        },
         /* --> (optional) throws an error if the created relationships are not equal to this number */
         assertCreatedRelationships: 2,
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null
     }
 );

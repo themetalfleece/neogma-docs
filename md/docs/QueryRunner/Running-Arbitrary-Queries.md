@@ -1,18 +1,18 @@
 # Running Arbitrary Queries
 
-A `QueryRunner` instance can be used to run arbitrary/raw queries, by using the neo4j driver of the given session.
+A `QueryRunner` instance can be used to run arbitrary/raw queries.
 
 ```js
-/* --> let 'queryRunner' be a QueryRunner instance and 'session' and already-created session */
+/* --> let 'queryRunner' be a QueryRunner instance */
 const result = await queryRunner.run(
-    /* --> a session that's already created */
-    session, 
-    /* --> albitrary Cypher */
+    /* --> arbitrary Cypher */
     `MATCH (u:Users) WHERE u.id = $id RETURN u`,
-    /* --> bind parameter for the statement */
+    /* --> (optional) bind parameter for the statement */
     {
         id: '1'
-    }
+    },
+    /* --> (optional) an existing session or transaction to use */
+    null,
 );
 
 /* --> the result is the QueryResult from the neo4j driver */

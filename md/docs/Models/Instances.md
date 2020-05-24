@@ -18,7 +18,7 @@ An Instance is returned from various Model operations (such as [Create](./Creati
     await user.save({
         /* --> (optional, default true) validates that the properties of the Instance are valid, given the schema of the Model definition */
         validate: true,
-        /* --> (optional) a session object for this query to run. If empty/null, a new session will be created */
+        /* --> (optional) an existing session or transaction to use */
         session: null,
     });
 ```

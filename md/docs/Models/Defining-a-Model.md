@@ -121,7 +121,7 @@ A sample Model definition with all configuration options is the following. Note 
 > >     typeof relationshipCreationKeys.RelatedNodesToAssociate,
 > >     typeof relationshipCreationKeys.RelationshipValuesToCreate,
 > >     StaticsI, // --> optional, needed only if they are defined
-> >     MethodsI, // --> optional, needed only if they are defined
+> >     MethodsI // --> optional, needed only if they are defined
 > >     > (
 > >     {
 > >     /* --> the label that the nodes of this Model have. For multiple nodes, an array can be provided like ['User', 'New'] */

@@ -17,7 +17,7 @@ const users = await Users.findMany({
     limit: 3,
     /* --> (optional) the order of this query, in this case by: age DESC, id ASC */
     order: [['age', 'DESC'], ['id', 'ASC']],
-    /* --> (optional) */
+    /* --> (optional) an existing session or transaction to use */
     session: null,
 });
 
@@ -39,7 +39,7 @@ const user = await Users.findOne({
     },
     /* --> (optional) the order of this query, in this case by: id ASC */
     order: [['id', 'ASC']],
-    /* --> (optional) */
+    /* --> (optional) an existing session or transaction to use */
     session: null,
 });
 

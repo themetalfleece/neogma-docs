@@ -19,7 +19,7 @@ const user = await Users.createOne(
         merge: true,
         /* --> (optional, default true) validates the properties of the node */
         validate: true,
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null,
     }
 );
@@ -46,7 +46,7 @@ const users = await Users.createMany(
         merge: true,
         /* --> (optional, default true) validates all nodes */
         validate: true,
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null,
     }
 );
@@ -143,7 +143,7 @@ const usersWithOrders = await Users.createMany(
         merge: true,
         /* --> (optional, default true) validates all nodes */
         validate: true,
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null,
     }
 );

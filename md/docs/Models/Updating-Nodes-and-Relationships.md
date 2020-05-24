@@ -20,7 +20,7 @@ const result = await Users.update(
         },
         /* --> (optional, default false) whether to return the values of the nodes after the update */
         return: true,
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null,
     }
 );
@@ -61,7 +61,7 @@ await Users.updateRelationship(
                 createdAt: '2020-02-02'
             }
         },
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null,
     }
 );
@@ -92,7 +92,7 @@ await user.updateRelationship(
                 createdAt: '2020-02-02'
             }
         },
-        /* --> (optional) */
+        /* --> (optional) an existing session or transaction to use */
         session: null,
     }
 );
