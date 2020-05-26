@@ -41,6 +41,8 @@ const neogma = new Neogma(
     {
         /* --> (optional) logs every query that Neogma runs, using the given function */
         logger: console.log, 
+        /* --> any driver configuration can be used */
+        encrypted: true,
     }
 );
 ```
