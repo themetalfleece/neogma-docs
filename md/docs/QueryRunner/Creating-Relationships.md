@@ -23,8 +23,8 @@ const result = await queryRunner.createRelationship({
         /* --> the direction of this relationship, between source and target. Valid values are 'in', 'out', 'none' */
         direction: 'out',
         /* --> (optional) properties of the relationship */
-        values: {
-            createdAt: '2020-02-02'
+        properties: {
+            rating: 4
         }
     },
     /* --> (optional) the where clause for the source and target nodes to be matched. A param object or a Where instance can be used. The source/target identifiers needs to be used as keys */

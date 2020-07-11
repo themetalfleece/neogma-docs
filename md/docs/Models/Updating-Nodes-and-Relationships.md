@@ -40,8 +40,8 @@ Relationship properties can be updated directly by providing the values to be se
 ```js
 await Users.updateRelationship(
     {
-        /* --> sets the 'createdAt' property of the relationship to the following */
-        createdAt: '2020-05-05'
+        /* --> sets the 'rating' property of the relationship to the following */
+        rating: 5
     },
     {
         /* --> used the 'Orders' alias for the relationship configuration, as provided in the Model definition */
@@ -56,9 +56,9 @@ await Users.updateRelationship(
             target: {
                 id: '2'
             },
-            /* --> the relationship(s) between the source and the target node(s) are matched to have the following 'createdAt' */
+            /* --> the relationship(s) between the source and the target node(s) are matched to have the following 'rating' */
             relationship: {
-                createdAt: '2020-02-02'
+                rating: 4
             }
         },
         /* --> (optional) an existing session or transaction to use */
@@ -75,8 +75,8 @@ Similar to the Model static, relationship properties can be updated directly by 
 /* --> let 'user' be a Users Instance. It's used as the source node */
 await user.updateRelationship(
     {
-        /* --> sets the 'createdAt' property of the relationship to the following */
-        createdAt: '2020-05-05'
+        /* --> sets the 'rating' property of the relationship to the following */
+        rating: 5
     },
     {
         /* --> used the 'Orders' alias for the relationship configuration, as provided in the Model definition */
@@ -87,9 +87,9 @@ await user.updateRelationship(
             target: {
                 id: '2'
             },
-            /* --> the relationship(s) between the source and the target node(s) are matched to have the following 'createdAt' */
+            /* --> the relationship(s) between the source and the target node(s) are matched to have the following 'rating' */
             relationship: {
-                createdAt: '2020-02-02'
+                rating: 4
             }
         },
         /* --> (optional) an existing session or transaction to use */

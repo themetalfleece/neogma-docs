@@ -19,12 +19,12 @@ The used classes and functions can be imported as follows:
 > :Tabs
 > > :Tab title=require
 > > ```js
-> > const { BindParam, ModelFactory, Neogma, QueryRunner, Where, getSession } = require('neogma');
+> > const { BindParam, ModelFactory, Neogma, QueryRunner, Where, getSession, getResultProperties } = require('neogma');
 > > ```
 >
 > > :Tab title=import
 > > ```ts
-> > import { BindParam, ModelFactory, Neogma, QueryRunner, Where, getSession } from 'neogma';
+> > import { BindParam, ModelFactory, Neogma, QueryRunner, Where, getSession, getResultProperties } from 'neogma';
 > > // importing types
 > > import { ModelRelatedNodesI, NeogmaInstance } from 'neogma';
 > > ```
@@ -56,9 +56,9 @@ It also has the neo4j Driver and a [QueryRunner](./QueryRunner/Overview) instanc
 
 ```js
 /* --> gets the neo4j driver */
-const driver = neogma.getDriver();
+const driver = neogma.driver;
 /* --> gets the QueryRunner instance used by this neogma instance */
-const queryRunner = neogma.getQueryRunner();
+const queryRunner = neogma.queryRunner;
 /* --> wrapper for getSession */
 const getSession = neogma.getSession; // @see [Sessions](./Sessions)
 /* --> the defined Models by their names */

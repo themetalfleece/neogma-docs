@@ -95,19 +95,17 @@ await Users.createMany([
         id: '1',
         name: 'John',
         age: 38,
-        RelatedNodesToAssociate: {
-            /* --> assuming we're created an Orders Model and alias */
-            Orders: {
-                attributes: [{
-                    /* --> creates a new Order node with the following properties, and associates it with John */
-                    id: '1',
-                    status: 'confirmed'
-                }],
-                where: {
-                    params: {
-                        /* --> matches an Order node with the following id and associates it with John */
-                        id: '2'
-                    }
+        /* --> assuming we're created an Orders Model and alias */
+        Orders: {
+            properties: [{
+                /* --> creates a new Order node with the following properties, and associates it with John */
+                id: '1',
+                status: 'confirmed'
+            }],
+            where: {
+                params: {
+                    /* --> matches an Order node with the following id and associates it with John */
+                    id: '2'
                 }
             }
         }

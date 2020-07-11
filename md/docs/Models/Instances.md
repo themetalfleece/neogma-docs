@@ -34,7 +34,7 @@ An Instance is returned from various Model operations (such as [Create](./Creati
     });
 ```
 
-**WARNING**: Updating a instance ignores its `RelatedNodesToAssociate` field (as described below) meaning that related nodes will not be created and associated. Only the initial `save` (when an instance doesn't yet exist in the database) creates related nodes.
+**WARNING**: Updating a instance ignores its Association fields (as described below) meaning that related nodes will not be created and associated. Only the initial `save` (when an instance doesn't yet exist in the database) creates related nodes.
 
 ## Accessing the Instance's properties and methods
 ```js
@@ -63,19 +63,17 @@ An Instance is returned from various Model operations (such as [Create](./Creati
 
 ## Creating related nodes
 ```js
-    /* --> by using the RelatedNodesToAssociate key specified in the Model definition, related nodes can also be created */
+    /* --> by using the Related Nodes aliases specified in the Model definition, related nodes can also be created */
     const userWithOrder = Users.build({
         id: '2',
         name: 'Alex',
-        RelatedNodesToAssociate: {
-            /* --> the 'Orders' alias will be used, as defined in the 'Users' model */
-            Orders: {
-                /* --> (optional) create new nodes and associate with them */
-                attributes: [{
-                    /* --> a new Order node will be created with the following properties, and a relationship with the configuration of alias 'Orders' will be created (direction: out, name: CREATES) */
-                    id: '3'
-                }],
-            }
+        /* --> the 'Orders' alias will be used, as defined in the 'Users' model */
+        Orders: {
+            /* --> (optional) create new nodes and associate with them */
+            properties: [{
+                /* --> a new Order node will be created with the following properties, and a relationship with the configuration of alias 'Orders' will be created (direction: out, name: CREATES) */
+                id: '3'
+            }],
         }
     });
     /* --> when calling the following method, the User node, the Order node and the relationship between them */

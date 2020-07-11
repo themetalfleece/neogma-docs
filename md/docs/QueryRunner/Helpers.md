@@ -121,6 +121,19 @@ console.log(result); // "{ x: $x__aaaa, y: $y }"
 console.log(bindParam.get()); // { x: 4, x__aaaa: 5, y: 'foo' }
 ```
 
+## Getting the properties from a QueryResult
+The properties of nodes can be easily fetched
+```js
+const queryResult = await queryRunner.run(
+    `MATCH (n:User {id: $id}) RETURN n`,
+    { id: 1 },
+);
+
+/* --> get the properties of the node with the alias 'n' */
+const properties = getResultProperties(queryResult, 'n');
+console.log(properties[0].id); // 1
+```
+
 ## Default QueryRunner identifiers
 
 `QueryRunner` exposes the default identifiers which are used in the queries.

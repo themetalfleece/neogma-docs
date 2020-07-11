@@ -40,15 +40,20 @@ A sample Model definition with all configuration options is the following. Note 
 > >             name: 'CREATES',
 > >             /* --> an arbitrary alias to be used for identifying this relationship when using the relationship-related functions */
 > >             alias: 'Orders',
+> >             /* --> properties of the relationship between the nodes */
+> >             properties: {
+> >                 /* --> the key to be used that the property is a relationship property */
+> >                 Rating: {
+> >                     /* --> the actual property to be created in the relationship */
+> >                     property: 'rating',
+> >                     /* --> schema validation for it */
+> >                     schema: {
+> >                         type: 'number',
+> >                     },
+> >                 },
+> >             }
 > >         },
 > >     ],
-> >     /* --> arbitrary keys to indicate that data is about creating related nodes or relationship values. More information can be found on the Create functions */
-> >     relationshipCreationKeys: {
-> >         /* --> the key to be used for creating related nodes (and automatically associating with them) */
-> >         RelatedNodesToAssociate: 'RelatedNodesToAssociate',
-> >         /* --> the key to be used for creating relationship values (adding properties to relationships) */
-> >         RelationshipValuesToCreate: 'RelationshipValuesToCreate',
-> >     },
 > >     /* --> (optional) the key to be used as a unique identifier, which enables some Instance methods */
 > >     primaryKeyField: 'id',
 > >     /* --> (optional) statics to be added to the Model. In this example, can be called using `Users.foo()` */
@@ -76,14 +81,6 @@ A sample Model definition with all configuration options is the following. Note 
 > >     age?: number,
 > >     id: string,
 > > }
-> >
-> > /* --> arbitrary keys to indicate that data is about creating related nodes or relationship values. More information can be found on the Create functions */
-> > const relationshipCreationKeys = {
-> >     /* --> the key to be used for creating related nodes (and automatically associating with them) */
-> >     RelatedNodesToAssociate: 'RelatedNodesToAssociate',
-> >     /* --> the key to be used for creating relationship values (adding properties to relationships) */
-> >     RelationshipValuesToCreate: 'RelationshipValuesToCreate',
-> > } as const;
 > > 
 > > /* --> the interface for the related Models. The keys are the arbitrary aliases of the relationships */
 > > interface UsersRelatedNodesI {
@@ -92,11 +89,9 @@ A sample Model definition with all configuration options is the following. Note 
 > >         typeof Orders,
 > >         /* --> the type of the Instance of the related Model. It should have a definition to correspond to `UsersInstance`, as defined below */
 > >         OrdersInstance,
-> >         /* --> the name of the key for creating relationship values. It should match the one defined above, like this: */
-> >         typeof relationshipCreationKeys.RelationshipValuesToCreate,
-> >         /* --> (optional) the interface of the relationship values */
+> >         /* --> (optional) the interface of the relationship values. The keys are the aliases to be used to indicate that the property refers to a relationship property */
 > >         {
-> >             rating: number
+> >             Rating: number
 > >         }
 > >      >
 > > }
@@ -118,8 +113,6 @@ A sample Model definition with all configuration options is the following. Note 
 > > const Users = ModelFactory<
 > >     UserAttributesI,
 > >     UsersRelatedNodesI,
-> >     typeof relationshipCreationKeys.RelatedNodesToAssociate,
-> >     typeof relationshipCreationKeys.RelationshipValuesToCreate,
 > >     StaticsI, // --> optional, needed only if they are defined
 > >     MethodsI // --> optional, needed only if they are defined
 > >     > (
@@ -153,10 +146,20 @@ A sample Model definition with all configuration options is the following. Note 
 > >             name: 'CREATES',
 > >             /* --> an arbitrary alias to be used for identifying this relationship when using the relationship-related functions */
 > >             alias: 'Orders',
+> >             /* --> properties of the relationship between the nodes */
+> >             properties: {
+> >                 /* --> the key to be used that the property is a relationship property */
+> >                 Rating: {
+> >                     /* --> the actual property to be created in the relationship */
+> >                     property: 'rating',
+> >                     /* --> schema validation for it */
+> >                     schema: {
+> >                         type: 'number',
+> >                     },
+> >                 },
+> >             }
 > >         },
 > >     ],
-> >     /* --> this variable is already defined */
-> >     relationshipCreationKeys,
 > >     /* --> (optional) the key to be used as a unique identifier, which enables some Instance methods */
 > >     primaryKeyField: 'id',
 > >     /* --> (optional) statics to be added to the Model. In this example, can be called using `Users.foo()` */
@@ -182,9 +185,7 @@ A sample Model definition with all configuration options is the following. Note 
 ## Using the Model's helpers
 The created Model provides functions for database operations, as well as the following helpers
 ```js
-    /* --> gets the relationshipCreationKeys provided when defining the Model */
-    Users.getRelationshipCreationKeys();  // --> { RelatedNodesToAssociate: 'RelatedNodesToAssociate', RelationshipValuesToCreate: 'RelationshipValuesToCreate' }
-    /* --> by providing an alias, gets the relationship configuration (model, direction, name) */
+    /* --> by providing an alias, gets the relationship configuration (model, direction, name, properties) */
     Users.getRelationshipByAlias('Orders'); // --> { model: Orders, direction: 'out', name: 'CREATES' }
     /* --> gets the primaryKeyField provided when defining the Model */
     Users.getPrimaryKeyField(); // --> id

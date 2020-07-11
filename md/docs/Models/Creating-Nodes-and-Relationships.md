@@ -30,54 +30,48 @@ Neogma provides functionality for creating other nodes while creating a given no
 const userWithOrder = await Users.createOne({
     id: '1',
     name: 'Alex',
-    /* --> associate with other nodes. The appropriate key (i.e. 'RelatedNodesToAssociate') can be taken like this */
-    [Users.getRelationshipCreationKeys().RelatedNodesToAssociate]: {
-        /* --> the Orders alias will be used, as defined in the Users model */
-        Orders: {
-            /* --> (optional) create new nodes and associate with them */
-            attributes: [
-                /* --> creates the following 2 Order nodes, and creates a relationship with each one of them using the configuration of the Orders alias  */
-                {
-                    id: '2'
-                },
-                {
-                    id: '3',
-                    items: 5,
-                    /* --> the relationship is created with the following properties. The appropriate key (i.e. 'RelationshipValuesToCreate') can be taken like this */
-                    [Users.getRelationshipCreationKeys().RelationshipValuesToCreate]: {
-                        createdAt: '2020-02-02'
-                    },
-                    /* --> can create nodes and associate them with this Order node. The alias and configuration is that of the Orders model */
-                    [Orders.getRelationshipCreationKeys().RelatedNodesToAssociate]: {
-                        /* --> the 'Critics' alias will be used, as defined in the 'Orders' model */
-                        Critics: {
-                            attributes: [{ id: '10' }]
-                        }
-                    }
+    /* --> associate with other nodes */
+    /* --> the Orders alias will be used, as defined in the Users model */
+    Orders: {
+        /* --> (optional) create new nodes and associate with them */
+        properties: [
+            /* --> creates the following 2 Order nodes, and creates a relationship with each one of them using the configuration of the Orders alias  */
+            {
+                id: '2'
+            },
+            {
+                id: '3',
+                items: 5,
+                /* --> the relationship is created with the following property. It uses the alias (Rating) as defined in the Model. The actual property property will be that in the Model relationships definition */
+                Rating: 4,
+                /* --> can create nodes and associate them with this Order node. The alias and configuration is that of the Orders model. This can be nested indefinitely */
+                /* --> the 'Critics' alias will be used, as defined in the 'Orders' model */
+                Critics: {
+                    properties: [{ id: '10' }]
                 }
-            ],
-            /* --> (optional) also associates the User node with existing Order nodes */
-            where: [
-                {
-                    /* --> the Where clause find matching the existing Nodes */
-                    params: { // @see [Where](../Where-Parameters)
-                        id: '3'
-                    },
-                    /* --> (optional) properties can be added to the relationship created by matching the User node with the existing Order nodes */
-                    [Users.getRelationshipCreationKeys().RelationshipValuesToCreate]: {
-                        createdAt: '2020-01-01',
-                    }
+            }
+        ],
+        /* --> (optional) also associates the User node with existing Order nodes */
+        where: [
+            {
+                /* --> the Where clause find matching the existing Nodes */
+                params: { // @see [Where](../Where-Parameters)
+                    id: '3'
                 },
-                {
-                    /* --> another object can be used for matching the User node with the Order nodes of this where independently */
-                    params: {
-                        items: 3,
-                    }
+                /* --> (optional) properties can be added to the relationship created by matching the User node with the existing Order nodes */
+                relationshipProperties: {
+                    Rating: 4,
                 }
-            ]
-        },
-        /* --> other aliases can be used here, to associate the User node with those of other Models */
-    }
+            },
+            {
+                /* --> another object can be used for matching the User node with the Order nodes of this where independently */
+                params: {
+                    items: 3,
+                }
+            }
+        ]
+    },
+    /* --> other aliases can be used here, to associate the User node with those of other Models */
 });
 
 console.log(userWithOrder.id); // "1"
@@ -95,7 +89,7 @@ const usersWithOrders = await Users.createMany(
         {
             id: '2',
             name: 'Alex',
-            [Users.getRelationshipCreationKeys().RelatedNodesToAssociate]: {
+            Orders: {
                 /* --> same interface as createOne, which will apply only to this node */
             }
         }
@@ -134,8 +128,8 @@ await Users.relateTo(
             },
         },
         /* --> properties of the relationship to be created */
-        values: {
-            createdAt: '2020-02-02'
+        properties: {
+            rating: 4,
         },
         /* --> (optional) throws an error if the created relationships are not equal to this number */
         assertCreatedRelationships: 2,
@@ -161,8 +155,8 @@ await user.relateTo(
             id: '2',
         },
         /* --> properties of the relationship to be created */
-        values: {
-            createdAt: '2020-02-02'
+        properties: {
+            rating: 4,
         },
         /* --> (optional) throws an error if the created relationships are not equal to this number */
         assertCreatedRelationships: 2,
