@@ -86,7 +86,7 @@ A sample Model definition with all configuration options is the following. Note 
 > > interface UsersRelatedNodesI {
 > >     'Orders': ModelRelatedNodesI<
 > >         /* --> the related Model */
-> >         typeof Orders,
+> >         typeof Orders, /* --> when refering to the same Model that is currently being defined, this line must be replaced with `{ createOne: typeof Orders["createOne"] }` */
 > >         /* --> the type of the Instance of the related Model. It should have a definition to correspond to `UsersInstance`, as defined below */
 > >         OrdersInstance,
 > >         /* --> (optional) the interface of the relationship values. The keys are the aliases to be used to indicate that the property refers to a relationship property */
