@@ -19,15 +19,31 @@ The used classes and functions can be imported as follows:
 > :Tabs
 > > :Tab title=require
 > > ```js
-> > const { BindParam, ModelFactory, Neogma, QueryRunner, Where, getSession, getResultProperties } = require('neogma');
+> > const { BindParam, ModelFactory, Neogma, QueryRunner, Where, getSession, getResultProperties, neo4jDriver } = require('neogma');
 > > ```
 >
 > > :Tab title=import
 > > ```ts
-> > import { BindParam, ModelFactory, Neogma, QueryRunner, Where, getSession, getResultProperties } from 'neogma';
+> > import { BindParam, ModelFactory, Neogma, QueryRunner, Where, getSession, getResultProperties, neo4jDriver } from 'neogma';
 > > // importing types
-> > import { ModelRelatedNodesI, NeogmaInstance } from 'neogma';
+> > import { 
+> >     /* --> used in Model definition */
+> >     ModelRelatedNodesI, 
+> >     NeogmaInstance, 
+> >     /* --> all possible neo4j types which can be used in Models */
+> >     Neo4jSupportedTypes 
+> > } from 'neogma';
 > > ```
+
+The `neo4jDriver` exports everything from the `neo4j-driver` package, including types, validators, etc:
+```js
+/* --> validator */
+neo4jDriver.Date();
+/* --> type contructor */
+neo4jDriver.types.DateTime();
+/* --> typescript interface */
+neo4jDriver.Point;
+```
 
 ## Initializing
 To get started, a Neogma instance needs to be initialized

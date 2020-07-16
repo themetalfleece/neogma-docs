@@ -11,7 +11,7 @@ A sample Model definition with all configuration options is the following. Note 
 > > :Tab title=Javascript
 > > ```js
 > > const Users = ModelFactory({
-> >     /* --> the label that the nodes of this Model have. For multiple nodes, an array can be provided like ['User', 'New'] */
+> >     /* --> the label that the nodes of this Model have. For multiple labels, an array can be provided like ['User', 'New'] */
 > >     label: 'User',
 > >     /* --> The properties of the nodes of this Model and the validation for them. This follows the revalidator schema configuration */
 > >     schema: {
@@ -30,16 +30,15 @@ A sample Model definition with all configuration options is the following. Note 
 > >         }
 > >     },
 > >     /* --> all the possible relationships (with other Models or itself), for relationship-related functions to work properly */
-> >     relationships: [
-> >         {
+> >     relationships: {
+> >         /* --> an arbitrary alias to be used for identifying this relationship when using the relationship-related functions */
+> >         Orders: {
 > >             /* --> reference to the Orders Model. For reference to this model, the value 'self' can be used */
 > >             model: Orders,
 > >             /* --> the direction of the relationship. Valid values are 'in' | 'out' | 'none' */
 > >             direction: 'out',
 > >             /* --> the name of this relationship */
 > >             name: 'CREATES',
-> >             /* --> an arbitrary alias to be used for identifying this relationship when using the relationship-related functions */
-> >             alias: 'Orders',
 > >             /* --> properties of the relationship between the nodes */
 > >             properties: {
 > >                 /* --> the key to be used that the property is a relationship property */
@@ -52,8 +51,8 @@ A sample Model definition with all configuration options is the following. Note 
 > >                     },
 > >                 },
 > >             }
-> >         },
-> >     ],
+> >         }
+> >     },
 > >     /* --> (optional) the key to be used as a unique identifier, which enables some Instance methods */
 > >     primaryKeyField: 'id',
 > >     /* --> (optional) statics to be added to the Model. In this example, can be called using `Users.foo()` */
@@ -75,12 +74,12 @@ A sample Model definition with all configuration options is the following. Note 
 > > :Tab title=Typescript
 > > ```ts
 > > 
-> > /* --> the interface of the attributes of the Instance (properties of the node). They match the schema definition */
-> > interface UserAttributesI {
+> > /* --> the interface of the properties of the Instance (properties of the node). They match the schema definition */
+> > type UserPropertiesI = {
 > >     name: string,
 > >     age?: number,
 > >     id: string,
-> > }
+> > };
 > > 
 > > /* --> the interface for the related Models. The keys are the arbitrary aliases of the relationships */
 > > interface UsersRelatedNodesI {
@@ -108,16 +107,16 @@ A sample Model definition with all configuration options is the following. Note 
 > > }
 > >
 > > /* --> the type of the Instance of this Model. Its generics are interfaces that are defined in this file */
-> > type UsersInstance = NeogmaInstance<UserAttributesI, UsersRelatedNodesI, MethodsI>;
+> > type UsersInstance = NeogmaInstance<UserPropertiesI, UsersRelatedNodesI, MethodsI>;
 > >
 > > const Users = ModelFactory<
-> >     UserAttributesI,
+> >     UserPropertiesI,
 > >     UsersRelatedNodesI,
 > >     StaticsI, // --> optional, needed only if they are defined
 > >     MethodsI // --> optional, needed only if they are defined
 > >     > (
 > >     {
-> >     /* --> the label that the nodes of this Model have. For multiple nodes, an array can be provided like ['User', 'New'] */
+> >     /* --> the label that the nodes of this Model have. For multiple labels, an array can be provided like ['User', 'New'] */
 > >     label: 'User',
 > >     /* --> The properties of the nodes of this Model and the validation for them. This follows the revalidator schema configuration */
 > >     schema: {
@@ -136,16 +135,15 @@ A sample Model definition with all configuration options is the following. Note 
 > >         }
 > >     },
 > >     /* --> all the possible relationships (with other Models or itself), for relationship-related functions to work properly */
-> >     relationships: [
-> >         {
+> >     relationships: {
+> >        /* --> an arbitrary alias to be used for identifying this relationship when using the relationship-related functions. It must be a key of UsersRelatedNodesI */
+> >        Orders: {
 > >             /* --> reference to the Orders Model. For reference to this model, the value 'self' can be used */
 > >             model: Orders,
 > >             /* --> the direction of the relationship. Valid values are 'in' | 'out' | 'none' */
 > >             direction: 'out',
 > >             /* --> the name of this relationship */
 > >             name: 'CREATES',
-> >             /* --> an arbitrary alias to be used for identifying this relationship when using the relationship-related functions */
-> >             alias: 'Orders',
 > >             /* --> properties of the relationship between the nodes */
 > >             properties: {
 > >                 /* --> the key to be used that the property is a relationship property */
@@ -159,7 +157,7 @@ A sample Model definition with all configuration options is the following. Note 
 > >                 },
 > >             }
 > >         },
-> >     ],
+> >     },
 > >     /* --> (optional) the key to be used as a unique identifier, which enables some Instance methods */
 > >     primaryKeyField: 'id',
 > >     /* --> (optional) statics to be added to the Model. In this example, can be called using `Users.foo()` */
