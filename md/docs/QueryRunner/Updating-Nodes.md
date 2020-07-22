@@ -17,7 +17,8 @@ const result = await queryRunner.update({
         /* --> the identifier needs to be used as a key */
         u: {
             id: {
-                $in: ['1', '2']
+                /* --> using the "in" Symbol from "Op" */
+                $[Op.in]: ['1', '2']
             }
         }
     },

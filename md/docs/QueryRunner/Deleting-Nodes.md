@@ -12,7 +12,8 @@ const result = await queryRunner.delete({
         /* --> the identifier needs to be used as a key */
         u: {
             id: {
-                $in: ['1', '2']
+                /* --> using the "in" Symbol from "Op" */
+                $[Op.in]: ['1', '2']
             }
         }
     },

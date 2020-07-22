@@ -11,7 +11,8 @@ const users = await Users.findMany({
     where: {
         /* --> the name property of the User Nodes must be 'John' and their id must be in: ('1', '2') */
         name: 'John',
-        id: { $in: ['1', '2'] },
+        /* --> using the "in" Symbol from "Op" */
+        id: { [Op.in]: ['1', '2'] },
     },
     /* --> (optional) the limit of this query */
     limit: 3,

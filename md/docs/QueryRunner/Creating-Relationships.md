@@ -32,7 +32,8 @@ const result = await queryRunner.createRelationship({
         /* --> where params for the source Node. The source identifier needs to be used as a key */
         source: {
             id: {
-                $in: ['1', '2']
+        /* --> using the "in" Symbol from "Op" */
+                [Op.in]: ['1', '2']
             }
         },
         /* --> where params for the target Node. The target identifier needs to be used as a key */
