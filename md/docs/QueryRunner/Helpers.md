@@ -31,33 +31,64 @@ console.log(getIdentifierWithLabel('MyIdentifier', 'MyLabel')); // ":MyLabel"
 ```
 
 ## Getting a relationship direction with its name
-`QueryRunner.getRelationshipDirectionAndName` returns a string for a relationship direction and name, to be used in a query.
+`QueryRunner.getRelationshipStatement` returns a string for a relationship direction, name, and inner info (like a where), to be used in a query.
 ```js
-const { getRelationshipDirectionAndName } = QueryRunner;
+const { getRelationshipStatement } = QueryRunner;
 
-console.log(getRelationshipDirectionAndName({
+console.log(getRelationshipStatement({
     direction: 'out',
     name: 'HAS',
     identifier: 'r'
 })); // "-[r:HAS]->"
 
-console.log(getRelationshipDirectionAndName({
+console.log(getRelationshipStatement({
     direction: 'in',
     name: 'HAS',
     identifier: 'r'
 })); // "<-[r:HAS]-"
 
-console.log(getRelationshipDirectionAndName({
+console.log(getRelationshipStatement({
     direction: 'none',
     name: 'HAS',
     identifier: 'r'
 })); // "-[r:HAS]-"
 
-console.log(getRelationshipDirectionAndName({
+console.log(getRelationshipStatement({
     direction: 'out',
     name: 'HAS',
     // --> in any of the above cases, the identifier can be skipped
 })); // "-[:HAS]->"
+
+// --> an inner statement can be given
+console.log(getRelationshipStatement({
+    direction: 'out',
+    name: 'HAS',
+    identifier: 'r',
+    inner: '{ id: 1 }' // --> using a literal string as inner
+})); // "-[r:HAS { id: 1}]->"
+
+/* --> using a Where instance as inner */
+const where = new Where({ id: 1 });
+console.log(getRelationshipStatement({
+    direction: 'out',
+    name: 'HAS',
+    identifier: 'r',
+    inner: where 
+})); // "-[r:HAS { id: $id }]->"
+
+/* --> using a BindParam and a properties object instance as inner */
+const bindParam = new BindParam();
+console.log(getRelationshipStatement({
+    direction: 'out',
+    name: 'HAS',
+    identifier: 'r',
+    inner: {
+        properties: {
+            id: 1,
+        },
+        bindParam: bindParam
+    } // --> using a Where instance as inner
+})); // "-[r:HAS { id: $id }]->"
 ```
 
 ## Getting parts for a SET operation
@@ -130,8 +161,20 @@ const queryResult = await queryRunner.run(
 );
 
 /* --> get the properties of the node with the alias 'n' */
-const properties = getResultProperties(queryResult, 'n');
+const properties = QueryRunner.getResultProperties(queryResult, 'n');
 console.log(properties[0].id); // 1
+```
+
+## Getting how many nodes where deleted, from a QueryResult
+```js
+const res = await queryRunner.delete({
+    where: {
+        name: 'John'
+    },
+});
+
+const nodesDeleted = QueryRunner.getNodesDeleted(res);
+console.log(nodesDeleted); // 5
 ```
 
 ## Default QueryRunner identifiers
