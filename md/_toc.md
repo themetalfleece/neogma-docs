@@ -14,6 +14,11 @@
 
 [Sessions and Transactions](/docs/Sessions-and-Transactions)
 
+> :Collapse label=Query Builder
+> 
+> [Overview](/docs/QueryBuilder/Overview)
+> [Clauses](/docs/QueryBuilder/Clauses)
+
 > :Collapse label=Query Runner
 > 
 > [Overview](/docs/QueryRunner/Overview)
