@@ -13,10 +13,10 @@ export const config = /*#__PURE__*/configuration({
   src: {
     base: './md'
   },
-  // dest: {
-  //   html: '.',
-  //   namespace: '/neogma-docs',
-  // },
+  dest: {
+    html: '.',
+    namespace: '/neogma-docs',
+  },
   misc: {
     github: {
       repo: 'neogma',

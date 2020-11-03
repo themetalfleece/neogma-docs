@@ -64,11 +64,6 @@
       "name": "postNavSearch",
       "filename": "C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/components/page/toc/search/post-nav/index.js",
       "hash": "NJkKYCpAVLkNkwX0u6OYkg=="
-    },
-    {
-      "name": "reloadOnChange",
-      "filename": "C:/Users/jason/Documents/Projects/thesis/neogma-docs/.codedoc/node_modules/@codedoc/core/dist/es5/serve/reload.js",
-      "hash": "4Z/cPbJ68kjWA/Fd0D05+A=="
     }
   ],
   "components": [
