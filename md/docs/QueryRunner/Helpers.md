@@ -2,154 +2,68 @@
 
 The `QueryRunner` class also provides some helpers for custom Cypher queries.
 
-## Getting normalized labels
-`QueryRunner.getNormalizedLabels` returns a single string to be used in a query.
-```js
-const { getNormalizedLabels } = QueryRunner;
+## Building and running a QueryBuilder
 
-console.log(getNormalizedLabels('Users')); // `Users`
+Suppose we want to create a [QueryBuilder](../QueryBuilder/Overview) instance just to run it.
 
-console.log(getNormalizedLabels('Important Users')); // "`Important Users`"
+One way to do it is by creating the instance, then calling `queryRunner.run()` with its statement and bindParam.
 
-console.log(getNormalizedLabels(['Users', 'Active'])); // "`Users:Active`"
-
-console.log(getNormalizedLabels(['Users', 'Active'], 'or')); // "`Users|Active`"
-
-console.log(getNormalizedLabels(['Users', 'Active', 'Old'])); // "`Users:Active:Old`"
-```
-
-## Getting an identifier with a label
-`QueryRunner.getIdentifierWithLabel` returns a string to be used in a query, regardless if any of the identifier or label are null
-```js
-const { getIdentifierWithLabel } = QueryRunner;
-
-console.log(getIdentifierWithLabel('MyIdentifier', 'MyLabel')); // "MyIdentifier:MyLabel"
-
-console.log(getIdentifierWithLabel('MyIdentifier', 'MyLabel')); // "MyIdentifier"
-
-console.log(getIdentifierWithLabel('MyIdentifier', 'MyLabel')); // ":MyLabel"
-```
-
-## Getting a relationship direction with its name
-`QueryRunner.getRelationshipStatement` returns a string for a relationship direction, name, and inner info (like a where), to be used in a query.
-```js
-const { getRelationshipStatement } = QueryRunner;
-
-console.log(getRelationshipStatement({
-    direction: 'out',
-    name: 'HAS',
-    identifier: 'r'
-})); // "-[r:HAS]->"
-
-console.log(getRelationshipStatement({
-    direction: 'in',
-    name: 'HAS',
-    identifier: 'r'
-})); // "<-[r:HAS]-"
-
-console.log(getRelationshipStatement({
-    direction: 'none',
-    name: 'HAS',
-    identifier: 'r'
-})); // "-[r:HAS]-"
-
-console.log(getRelationshipStatement({
-    direction: 'out',
-    name: 'HAS',
-    // --> in any of the above cases, the identifier can be skipped
-})); // "-[:HAS]->"
-
-// --> an inner statement can be given
-console.log(getRelationshipStatement({
-    direction: 'out',
-    name: 'HAS',
-    identifier: 'r',
-    inner: '{ id: 1 }' // --> using a literal string as inner
-})); // "-[r:HAS { id: 1}]->"
-
-/* --> using a Where instance as inner */
-const where = new Where({ id: 1 });
-console.log(getRelationshipStatement({
-    direction: 'out',
-    name: 'HAS',
-    identifier: 'r',
-    inner: where 
-})); // "-[r:HAS { id: $id }]->"
-
-/* --> using a BindParam and a properties object instance as inner */
-const bindParam = new BindParam();
-console.log(getRelationshipStatement({
-    direction: 'out',
-    name: 'HAS',
-    identifier: 'r',
-    inner: {
-        properties: {
-            id: 1,
-        },
-        bindParam: bindParam
-    } // --> using a Where instance as inner
-})); // "-[r:HAS { id: $id }]->"
-```
-
-## Getting parts for a SET operation
-`QueryRunner.getSetParts` returns the parts and the statement for a SET operation.
-```js
-const { getSetParts } = QueryRunner;
-
-const existingBindParam = new BindParam({});
-const result = getSetParts({
-    /* --> the data to set */
-    data: {
-        x: 5,
-        y: 'foo'
-    },
-    /* --> BindParam instance to be used */
-    bindParam: existingBindParam, // @see [Bind Paramters](../Bind-Parameters)
-    /* --> the identifier to use */
-    identifier: 'node'
-});
-console.log(result.parts); // ["node.x = $x", "node.y = $y"]
-console.log(result.statement); // "SET node.x = $x, node.y = $y"
-console.log(bindParam.get()); // { x: 5, y: 'foo' }
-
-const existingBindParam = new BindParam({
-    x: 'irrelevant'
-});
-const result = getSetParts({
-    data: {
-        x: 5,
-        y: 'foo'
-    },
-    bindParam: existingBindParam,
-    identifier: 'node'
-});
-console.log(result.parts); // ["node.x = $x__aaaa", "node.y = $y"]
-console.log(result.statement); // "SET node.x = $x__aaaa, node.y = $y"
-console.log(bindParam.get()); // { x: 'irrelevant', x_aaaa: 5, y: 'foo' }
-```
-
-## Getting properties with query param values
-
-`QueryRunner` exposes a `getPropertiesWithParams` function which returns an object in a string format to be used in queries, while replacing its values with bind params.
+The `buildAndRun` method of a `QueryRunner` instance can be used, to run the queryBuilder straight away.
 
 ```js
-/* --> an existing BindParam instance, could have existing values */
-const bindParam = new BindParam({
-    x: 4,
-});
-const result = QueryRunner.getPropertiesWithParams(
-    /* --> the object to use */
+const queryBuilder = new QueryBuilder([
     {
-        x: 5,
-        y: 'foo'
-    },
-    /* --> an existing bindParam must be passed */
-    bindParam
+        match: '(n)'
+    }
+]);
+
+// --> let queryRunner be a QueryRunner instance
+await queryRunner.run(
+    queryBuilder.getStatement(),
+    queryBuilder.getBindParam().get()
 );
 
-/* --> the result gives us the needed object, while replacing its values with the appropriate bind param */
-console.log(result); // "{ x: $x__aaaa, y: $y }"
-console.log(bindParam.get()); // { x: 4, x__aaaa: 5, y: 'foo' }
+/* --> this is equivalent */
+await queryRunner.buildAndRun(queryBuilder);
+```
+
+Moreover, the `buildAndRun` method can be used to run a query straight away, without having to create a QueryBuilder instance. The example above is equivalent to this:
+
+```js
+await queryRunner.buildAndRun([
+    {
+        match: '(n)'
+    }
+]);
+```
+
+In case we want to use an existing `BindParam` instance of Session/Transaction:
+
+```js
+const existingBindParam = new BindParam({
+    x: 1
+});
+
+await queryRunner.buildAndRun(
+    [
+        {
+            match: {
+                identifier: 'n',
+                where: {
+                    x: '20'
+                }
+            }
+        }
+    ],
+    {
+        /* --> using an existing BindParam instance */
+        bindParam: existingBindParam,
+        /* --> using an existing Session or Transaction */
+        session: null,
+    }
+);
+
+console.log(bindParam.get()); // { x: 1, x__aaaa: '20' }
 ```
 
 ## Getting the properties from a QueryResult
@@ -178,7 +92,6 @@ console.log(nodesDeleted); // 5
 ```
 
 ## Default QueryRunner identifiers
-
 `QueryRunner` exposes the default identifiers which are used in the queries.
 
 ```js

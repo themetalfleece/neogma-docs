@@ -29,6 +29,7 @@
 > [Limit/Skip Clause](/docs/QueryBuilder/Limit-Skip-Clause)
 > [With Clause](/docs/QueryBuilder/With-Clause)
 > [Unwind Clause](/docs/QueryBuilder/Unwind-Clause)
+> [Helpers](/docs/QueryBuilder/Helpers)
 
 > :Collapse label=Query Runner
 > 
