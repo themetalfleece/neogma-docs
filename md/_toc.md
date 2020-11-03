@@ -18,6 +18,17 @@
 > 
 > [Overview](/docs/QueryBuilder/Overview)
 > [Clauses](/docs/QueryBuilder/Clauses)
+> [Match Clause](/docs/QueryBuilder/Match-Clause)
+> [Create Clause](/docs/QueryBuilder/Create-Clause)
+> [Set Clause](/docs/QueryBuilder/Set-Clause)
+> [Delete Clause](/docs/QueryBuilder/Delete-Clause)
+> [Where Clause](/docs/QueryBuilder/Where-Clause)
+> [Remove Clause](/docs/QueryBuilder/Remove-Clause)
+> [Order By Clause](/docs/QueryBuilder/Order-By-Clause)
+> [Return Clause](/docs/QueryBuilder/Return-Clause)
+> [Limit/Skip Clause](/docs/QueryBuilder/Limit-Skip-Clause)
+> [With Clause](/docs/QueryBuilder/With-Clause)
+> [Unwind Clause](/docs/QueryBuilder/Unwind-Clause)
 
 > :Collapse label=Query Runner
 > 
