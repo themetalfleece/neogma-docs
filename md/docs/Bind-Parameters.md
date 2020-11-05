@@ -162,4 +162,22 @@ const bindParamSecond = BindParam.acquire(bindParamFirst);
 console.log(bindParamFirst === bindParamSecond); // true
 ```
 
+## Removing parameters
+The `remove` method can be used to remove keys from the BindParam.
+
+```js
+const bindParam = new BindParam({
+    x: 5,
+    y: 'bar'
+});
+
+const uniqueName = bindParam.getUniqueNameAndAdd('x', 4);
+
+console.log(uniqueName); // x__aaaa
+console.log(bindParam.get()); // { x: 5, y: 'bar', x__aaaa: 4 }
+
+bindParam.remove([uniqueName, 'y']);
+console.log(bindParam.get()); // { x: 5 }
+```
+
 > :ToCPrevNext

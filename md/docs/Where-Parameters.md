@@ -16,8 +16,8 @@ const where = new Where({
     }
 });
 
-/* --> the "where" property has the statement to be used in the query */
-console.log(where.statement); // "n.x = $x AND n.y = $y"
+/* --> a statement can be generated to be used in the query */
+console.log(where.getStatement('text')); // "n.x = $x AND n.y = $y"
 /* --> the "bindParam" property has a BindParam instance whose values can be used in the query */
 console.log(where.bindParam.get()); // { x: 5, y: 'bar' }
 ```
@@ -35,7 +35,7 @@ const where = new Where({
     }
 });
 
-console.log(where.statement); // "n.x = $x AND n.y = $y AND o.z = $z"
+console.log(where.getStatement('text')); // "n.x = $x AND n.y = $y AND o.z = $z"
 console.log(where.bindParam.get()); // { x: 5, y: 'bar', z: true }
 ```
 
@@ -53,7 +53,7 @@ const where = new Where({
     }
 });
 
-console.log(where.statement); // "n.x = $x AND n.y = $y AND o.x = $x__aaaa"
+console.log(where.getStatement('text')); // "n.x = $x AND n.y = $y AND o.x = $x__aaaa"
 console.log(where.bindParam.get()); // { x: 5, y: 'bar', x_aaaa: true }
 ```
 
@@ -76,7 +76,7 @@ const where = new Where(
 );
 
 /* --> the "x" key already exists in the bind param, so a new one is used */
-console.log(where.statement); // "n.x = $x__aaaa AND n.y = $y"
+console.log(where.getStatement('text')); // "n.x = $x__aaaa AND n.y = $y"
 console.log(where.bindParam.get()); // { x: 4, x_aaaa: 5, y: 'bar' }
 console.log(where.bindParam === existingBindParam); // true
 ```
@@ -95,7 +95,7 @@ const existingWhere = new Where(
     }
 );
 
-console.log(existingWhere.statement); // "n.x = $x AND o.z = $z"
+console.log(existingWhere.getStatement('text')); // "n.x = $x AND o.z = $z"
 console.log(existingWhere.bindParam.get()); // { x: 4, z: true }
 
 const newWhere = new Where(
@@ -110,7 +110,7 @@ const newWhere = new Where(
     existingWhere
 );
 
-console.log(newWhere.statement); // "n.x = $x AND n.y = $y AND o.z = $z AND m.z = $z__aaaa"
+console.log(newWhere.getStatement('text')); // "n.x = $x AND n.y = $y AND o.z = $z AND m.z = $z__aaaa"
 console.log(newWhere.bindParam.get()); // { x: 4, y: 'bar', z: true, z__aaaa: 'foo' }
 ```
 
@@ -135,85 +135,17 @@ where.addParams({
     }
 });
 
-console.log(where.statement); // "n.x = $x AND n.y = $y AND n.z = $z AND o.x = $x__aaaa"
+console.log(where.getStatement('text')); // "n.x = $x AND n.y = $y AND n.z = $z AND o.x = $x__aaaa"
 console.log(where.bindParam.get()); // { x: 5, y: 'bar', z: true, x__aaaa: 4 }
 ```
 
-An existing `BindParam` instance can be used, to ensure unique keys. The same instance will be used in the `Where` instance, so it will be mutated.
-
-```js
-const existingBindParam = new BindParam({
-    x: 4,
-});
-
-const where = new Where(
-    {
-        n: {
-            /* --> the same key as in the bind param can be used */
-            x: 5,
-            y: 'bar'
-        }
-    }
-);
-
-where.addParams(
-    {
-        z: true,
-    },
-    existingBindParam
-)
-
-console.log(where.statement); // "n.x = $x__aaaa AND n.y = $y AND n.z = $z"
-console.log(where.bindParam.get()); // { x: 4, x_aaaa: 5, y: 'bar', z: true }
-console.log(where.bindParam === existingBindParam); // true
-```
-
-
-An existing `Where` instance can be used. In this case, the parameters of it will be merged with the one that we're adding params to. The existing `Where` instance won't be mutated at all.
-
-```js
-const existingWhere = new Where(
-    {
-        n: {
-            x: 4
-        },
-        o: {
-            z: true
-        }
-    }
-);
-
-console.log(existingWhere.statement); // "n.x = $x AND o.z = $z"
-console.log(existingWhere.bindParam.get()); // { x: 4, z: true }
-
-const newWhere = new Where(
-    {
-        n: {
-            y: 'bar'
-        },
-        m: {
-            z: 'foo'
-        }
-    },
-);
-
-newWhere.addParams(
-    {
-        n: {
-            a: 1
-        }
-    },
-    existingWhere
-);
-
-console.log(newWhere.statement); // "n.x = $x AND n.y = $y AND n.a = $a o.z = $z AND m.z = $z__aaaa"
-console.log(newWhere.bindParam.get()); // { x: 4, y: 'bar', a: 1, z: true, z__aaaa: 'foo' }
-```
-
-## Using a Where instance in a query
+## Getting the statement of a Where instance
 
 A `Where` instance can easily be used in a query using its `statement` and `bindParam` properties
 
+### Text form
+
+This is how the statement can be used in a "text" form
 ```js
 const where = new Where({
     n: {
@@ -225,10 +157,85 @@ const where = new Where({
     }
 });
 
+const textStatement = where.getStatement('text'); // n.x = $x AND n.y = $y AND o.z = $z
+const bindParamProperties = where.bindParam.get(); // { x: 5, y: 'bar', z: true }
+
 await queryRunner.run(
-    `MATCH (n), (o) WHERE ${where.statement} RETURN n, o`,
-    where.bindParam.get()
+    `MATCH (n), (o) WHERE ${textStatement} RETURN n, o`,
+    bindParamProperties
 );
+```
+
+### Object form
+
+This is how the statement can be used in an "object" form
+```js
+const where = new Where({
+    n: {
+        x: 5,
+        y: 'bar'
+    },
+});
+
+const objectStatement = where.getStatement('object'); // { x: $x, y: $y }
+const bindParamProperties = where.bindParam.get(); // { x: 5, y: 'bar' }
+
+await queryRunner.run(
+    `MATCH (n ${objectStatement}) RETURN n`,
+    bindParamProperties
+);
+```
+This ignores the identifier, and is only available for the "equals" operator. So, it's recommended that it's used with only 1 identifier.
+
+## Where operators
+
+While some of the operators can be used with plain objects, some others need to use the exported `Op` variable. It contains symbols for the operators.
+
+### Equals
+A direct object value corresponds to equality.
+```js
+const where = new Where({
+    n: {
+        x: 5
+    },
+});
+
+console.log(where.getStatement('text')); // n.x = $x
+console.log(where.getStatement('object')); // { x: $x }
+```
+
+### And
+The values of the parameters object are separated by an "and" operator
+```js
+const where = new Where({
+    n: {
+        x: 5,
+        y: 'bar'
+    },
+});
+
+console.log(where.getStatement('text')); // n.x = $x AND n.y = $y
+console.log(where.getStatement('object')); // { x: $x, y: $y }
+```
+
+### In
+```js
+const where = new Where({
+    n: {
+        x: { 
+            [Op.in]: [1, 2, 3],
+        },
+        y: 2
+    },
+    o: {
+        z: {
+            [Op.in]: [4, 5, 6],
+        }
+    }
+});
+
+console.log(where.getStatement('text')); // n.x IN $x AND n.y = $y AND o.z IN $z
+// "object" statement not available
 ```
 
 ## Acquire a Where instance
@@ -244,9 +251,9 @@ console.log(whereFirst === whereSecond); // true
 
 /* --> an object with where parameters can be used */
 const whereWithPlainParams = Where.acquire({
-        n: {
-            x: 5
-        }
+    n: {
+        x: 5
+    }
 });
 console.log(whereWithPlainParams instanceof Where); // true
 
