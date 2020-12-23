@@ -121,7 +121,7 @@ In order to avoid having to provide the QueryRunner instance on every call, the 
 This can be done as soon as the `Neogma` instance is created, and should be set only once.
 ```js
     /** let 'neogma' be a Neogma instance */
-    QueryBuilder.queryRunner = neogma.getQueryRunner();
+    QueryBuilder.queryRunner = neogma.queryRunner;
 
     await new QueryBuilder()
         .raw('match n return n')
