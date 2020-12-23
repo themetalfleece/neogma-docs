@@ -5,12 +5,8 @@
 A literal string will be used as is.
 
 ```js
-const queryBuilder = new QueryBuilder([
-    {
-        /* --> literal string to use */
-        with: 'a, b',
-    },
-]);
+const queryBuilder = new QueryBuilder()
+    .with('a, b'); /* --> literal string to use */
 
 console.log(queryBuilder.getStatement()); // WITH a, b
 console.log(queryBuilder.getBindParam().get()); // {}
@@ -20,11 +16,8 @@ console.log(queryBuilder.getBindParam().get()); // {}
 An array of strings can be used, which will be joined with a comma.
 
 ```js
-const queryBuilder = new QueryBuilder([
-    {
-        with: ['x', '{ y: x }']
-    },
-]);
+const queryBuilder = new QueryBuilder()
+    .with(['x', '{ y: x }']);
 
 console.log(queryBuilder.getStatement()); // WITH x, { y: x }
 console.log(queryBuilder.getBindParam().get()); // {}

@@ -4,12 +4,8 @@
 A literal string will be used as is.
 
 ```js
-const queryBuilder = new QueryBuilder([
-    {
-        /* --> literal string to use */
-        return: 'a, b.p1',
-    },
-]);
+const queryBuilder = new QueryBuilder()
+    .return('a, b.p1'); /* --> literal string to use */
 
 console.log(queryBuilder.getStatement()); // RETURN a, b.p1
 console.log(queryBuilder.getBindParam().get()); // {}
@@ -19,12 +15,8 @@ console.log(queryBuilder.getBindParam().get()); // {}
 The literal strings will be joined with a comma.
 
 ```js
-const queryBuilder = new QueryBuilder([
-    {
-        /* --> literal strings to use */
-        return: ['a', 'b.p1'],
-    },
-]);
+const queryBuilder = new QueryBuilder()
+    .return(['a', 'b.p1']); /* --> literal strings to use */
 
 console.log(queryBuilder.getStatement()); // RETURN a, b.p1
 console.log(queryBuilder.getBindParam().get()); // {}
@@ -34,20 +26,16 @@ console.log(queryBuilder.getBindParam().get()); // {}
 An array of objects with an identifier/name, and an optional property.
 
 ```js
-const queryBuilder = new QueryBuilder([
+const queryBuilder = new QueryBuilder().return([
     {
-        return: [
-            {
-                /* --> identifier/name to return */
-                identifier: 'a',
-                /* --> (optional) the property of the identifier to return */
-                property: 'name',
-            }
-            {
-                identifier: 'b'
-            }
-        ]
-    },
+        /* --> identifier/name to return */
+        identifier: 'a',
+        /* --> (optional) the property of the identifier to return */
+        property: 'name',
+    }
+    {
+        identifier: 'b'
+    }
 ]);
 
 console.log(queryBuilder.getStatement()); // RETURN a.name, b

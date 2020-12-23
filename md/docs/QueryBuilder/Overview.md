@@ -4,13 +4,34 @@ The `QueryBuilder` class can be used to easily generate cypher using objects. It
 
 ## Creating a QueryBuilder instance
 
-A QueryBuilder instance is created by using an array of the `QueryBuilderParameters['ParameterI']` type (details on [Clauses](./Clauses)).
+After a QueryBuilder instance is created, parameters can be added to it by using the parameter methods.
+More info about them can be found in [Clauses](./Clauses)
+```js
+const queryBuilder = new QueryBuilder()
+    .match({
+        identifier: 'p1'
+    })
+    .return('p1');
+
+/* --> additional parameters can be added at any point */
+queryBuilder.limit(1);
+```
+
+An existing BindParam instance can be used:
+```js
+const myBindParam = new BindParam();
+const queryBuilder = new QueryBuilder(null, { bindParam: myBindParam });
+```
+
+## Adding parameters by using an array of parameter objects
+
+A QueryBuilder instance can be created by using an array of the `QueryBuilderParameters['ParameterI']` type (details on [Clauses](./Clauses)).
 
 ```js
 const queryBuilder = new QueryBuilder(
     [
         {
-            match: { // @see [Clauses](./Clauses)
+            match: {
                 identifier: 'p1'
             }
         }
@@ -22,15 +43,13 @@ const queryBuilder = new QueryBuilder(
 );
 ```
 
-## Adding parameters to an existing QueryBuilderInstance
-
 Additional parameters can be added using the `addParams` method of the `QueryBuilder` instance. The parameters are the same as in the constructor.
 
 ```js
 // --> create the QueryBuilder instance using some initial parameters
 const queryBuilder = new QueryBuilder([
     {
-        match: { // @see [Clauses](./Clauses)
+        match: {
             identifier: 'p1'
         }
     }
@@ -39,17 +58,17 @@ const queryBuilder = new QueryBuilder([
 // --> add more parameters (using an array)
 queryBuilder.addParams([
     {
-        match: '(n)' // @see [Clauses](./Clauses)
+        match: '(n)'
     }
 ]);
 
 // --> add more parameters (using comma-separated objects)
 queryBuilder.addParams(
     {
-        limit: 2 // @see [Clauses](./Clauses)
+        limit: 2
     },
     {
-        return: 'p1' // @see [Clauses](./Clauses)
+        return: 'p1'
     }
 );
 ```
@@ -59,13 +78,9 @@ queryBuilder.addParams(
 The cypher statement of a `QueryBuilder` instance can be taken by using the `getStatement` method.
 
 ```js
-const queryBuilder = new QueryBuilder([
-    {
-        match: { // @see [Clauses](./Clauses)
-            identifier: 'p1'
-        }
-    }
-]);
+const queryBuilder = new QueryBuilder().match({
+    identifier: 'p1'
+});
 
 console.log(queryBuilder.getStatement()); // MATCH (p1)
 ```
@@ -73,16 +88,12 @@ console.log(queryBuilder.getStatement()); // MATCH (p1)
 The `BindParam` of a `QueryBuilder` instance can be taken by using the `getBindParam` method.
 
 ```js
-const queryBuilder = new QueryBuilder([
-    {
-        match: { // @see [Clauses](./Clauses)
-            identifier: 'p1',
-            where: {
-                id: '1'
-            }
-        }
+const queryBuilder = new QueryBuilder().match({
+    identifier: 'p1',
+    where: {
+        id: '1'
     }
-]);
+});
 
 console.log(queryBuilder.getStatement()); // MATCH (p1 { id: $id })
 const bindParam = queryBuilder.getBindParam();
@@ -99,7 +110,7 @@ const existingBindParam = new BindParam({
 const queryBuilder = new QueryBuilder(
     [
         {
-            match: { // @see [Clauses](./Clauses)
+            match: {
                 identifier: 'p1',
                 where: {
                     id: '1'
