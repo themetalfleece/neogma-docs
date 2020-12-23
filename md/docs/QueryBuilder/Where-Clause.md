@@ -45,14 +45,9 @@ const existingWhereInstance = new Where({
     }
 });
 const queryBuilder = new QueryBuilder(
-    {
-        where: existingWhereInstance,
-    },
-    {
-        /* --> for expected behavior, the Where instance and the QueryBuilder instance should use the same BindParam */
-        bindParam: existingWhereInstance.getBindParam(),
-    }
-);
+    /* --> for expected behavior, the Where instance and the QueryBuilder instance should use the same BindParam */
+    existingWhereInstance.getBindParam()
+).where(existingWhereInstance);
 
 console.log(queryBuilder.getStatement()); // WHERE identifier1.id = $id AND identifier2.id = $id__aaaa AND identifier2.age = $age
 console.log(queryBuilder.getBindParam().get()); // { id: '20', id__aaaa: '21', age: 28 }
