@@ -16,7 +16,9 @@ const user = await Users.createOne(
         /* --> (optional, default true) validates the properties of the node */
         validate: true,
         /* --> (optional) an existing session or transaction to use */
-        session: null, // @see [Sessions](../Sessions)
+        session: null, // @see [Sessions](../Sessions)        
+        /* --> (optional) makes sure that the total relationships created by "where" parameters equal to 1. See below for examples. */
+        assertRelationshipsOfWhere: 1,
     }
 );
 
@@ -61,7 +63,7 @@ const userWithOrder = await Users.createOne({
                 /* --> (optional) properties can be added to the relationship created by matching the User node with the existing Order nodes */
                 relationshipProperties: {
                     Rating: 4,
-                }
+                },
             },
             {
                 /* --> another object can be used for matching the User node with the Order nodes of this where independently */
