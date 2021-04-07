@@ -79,7 +79,38 @@ An Instance is returned from various Model operations (such as [Create](./Creati
     /* --> when calling the following method, the User node, the Order node and the relationship between them */
     await userWithOrder.save();
 ```
-For more examples of creating realted nodes, refer to the [Create operations](./Creating-Nodes-and-Relationships), as the same interface is used
+For more examples of creating realted nodes, refer to the [Create operations](./Creating-Nodes-and-Relationships), as the same interface is used.
+
+## Creating an Instance for an existing Node
+If a Node already exists in the database, an Instance can still be created. This is useful for running methods like `.save()` on it.
+
+The first parameter of the `build` function must equal to the data of the Node, for example from the statement result.
+
+The second parameter is an object with its `status` property set to `existing`.
+
+```js
+const result = await new QueryBuilder() // @see [QueryBuilder](../QueryBuilder/Overview)
+    .match({
+        model: Users,
+        where: {
+            id: '1'
+        },
+        identifier: 'u'
+    })
+    .return ('u')
+    .run();
+
+const userData = result.records[0]?.get('u');
+if (!userData) {
+    throw new Error('user not found');
+}
+
+const userInstance = Users.build(userData, { status: 'existing' });
+
+userInstance.name = 'Some new name';
+
+await userInstance.save(); /* --> the instance will be updated */
+```
 
 ## More Instance methods
 More Instance methods are found at the corresponding documentation, i.e. [Creating Nodes and Relationships](./Creating-Nodes-and-Relationships)
