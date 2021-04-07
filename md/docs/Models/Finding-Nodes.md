@@ -16,6 +16,8 @@ const users = await Users.findMany({
     },
     /* --> (optional) the limit of this query */
     limit: 3,
+    /* --> (optional) the skip of this query */
+    skip: 3,
     /* --> (optional) the order of this query, in this case by: age DESC, id ASC */
     order: [['age', 'DESC'], ['id', 'ASC']],
     /* --> (optional) an existing session or transaction to use */
