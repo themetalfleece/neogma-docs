@@ -202,6 +202,7 @@ const where = new Where({
 
 console.log(where.getStatement('text')); // n.x = $x
 console.log(where.getStatement('object')); // { x: $x }
+console.log(where.bindParam.get()); // { x: 5 }
 ```
 
 ### And
@@ -216,6 +217,7 @@ const where = new Where({
 
 console.log(where.getStatement('text')); // n.x = $x AND n.y = $y
 console.log(where.getStatement('object')); // { x: $x, y: $y }
+console.log(where.bindParam.get()); // { x: 5, y: 'bar' }
 ```
 
 ### In
@@ -236,6 +238,22 @@ const where = new Where({
 
 console.log(where.getStatement('text')); // n.x IN $x AND n.y = $y AND o.z IN $z
 // "object" statement not available
+console.log(where.bindParam.get()); // { x: [1, 2, 3], y: 2, z: [4, 5, 6] }
+```
+
+### Contains
+```js
+const where = new Where({
+    n: {
+        x: { 
+            [Op.contains]: 'xyz',
+        },
+    },
+});
+
+console.log(where.getStatement('text')); // n.x CONTAINS $x
+// "object" statement not available
+console.log(where.bindParam.get()); // { x: 'xyz' }
 ```
 
 ## Acquire a Where instance
