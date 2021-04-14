@@ -34,6 +34,8 @@ An Instance is returned from various Model operations (such as [Create](./Creati
     });
 ```
 
+If nothing has changed, `.save()` will do nothing.
+
 **WARNING**: Updating a instance ignores its Association fields (as described below) meaning that related nodes will not be created and associated. Only the initial `save` (when an instance doesn't yet exist in the database) creates related nodes.
 
 ## Accessing the Instance's properties and methods

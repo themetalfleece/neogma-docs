@@ -98,14 +98,18 @@ A sample Model definition with all configuration options is the following. Note 
 > > 
 > > /* --> the interface for the related Models. The keys are the arbitrary aliases of the relationships */
 > > interface UsersRelatedNodesI {
-> >     'Orders': ModelRelatedNodesI<
+> >     Orders: ModelRelatedNodesI<
 > >         /* --> the related Model */
 > >         typeof Orders, /* --> when refering to the same Model that is currently being defined, this line must be replaced with `{ createOne: typeof Orders["createOne"] }` */
 > >         /* --> the type of the Instance of the related Model. It should have a definition to correspond to `UsersInstance`, as defined below */
 > >         OrdersInstance,
-> >         /* --> (optional) the interface of the relationship values. The keys are the aliases to be used to indicate that the property refers to a relationship property */
+> >         /* --> (optional) the interface of the relationship properties, which will be used while creating the relationship. The keys are the aliases to be used to indicate that the property refers to a relationship property */
 > >         {
 > >             Rating: number
+> >         },
+> >         /* --> (optional) the interface of the relationship properties, as they are in the database. The keys are the actual property names */
+> >         {
+> >             rating: number
 > >         }
 > >      >
 > > }
@@ -163,7 +167,7 @@ A sample Model definition with all configuration options is the following. Note 
 > >             properties: {
 > >                 /* --> the key to be used that the property is a relationship property */
 > >                 Rating: {
-> >                     /* --> the actual property to be created in the relationship */
+> >                     /* --> the actual property to be created in the relationship (a key of of fourth generic of ModelRelatedNodesI, if given) */
 > >                     property: 'rating',
 > >                     /* --> schema validation for it */
 > >                     schema: {
@@ -231,6 +235,26 @@ The created Model provides functions for database operations, as well as the fol
     AdminUsers.getLabel(); // --> `Admin`:`User`
     /* --> getting a Model by its name by using the neogma instance */
     neogma.modelsByName['Users'];
+```
+
+The `ModelRelatedNodesI` equals to the following:
+```ts
+{
+    /** interface of the actual properties of the relationship (as given in the fourth generic) */
+    RelationshipProperties: object;
+    /** interface of the properties of the relationship used in create functions (as given in the third generic) */
+    CreateRelationshipProperties: object;
+    /** the instance of the related model (as given in the second generic) */
+    Instance: object;
+    /* --> the type of the data to create */
+    CreateData: object;
+}
+```
+
+For example, after fetching a relationship from the database, its properties can be typed like this:
+```ts
+// let "queryResult" be the result of a raw query
+const relationshipProperties: UsersRelatedNodesI['Orders']['RelationshipProperties'] = queryResult.records[0].get('n').properties;
 ```
 
 > :ToCPrevNext
