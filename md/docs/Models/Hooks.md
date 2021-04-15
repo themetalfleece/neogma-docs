@@ -4,22 +4,25 @@
 
 The `beforeCreate` hook runs before a Node is created by the `createOne`, `createMany` statics, and the `build` method.
 
+It runs before the node is validated, therefore it's suitable for mutating data before the validation runs.
+
 ```js
 Users.beforeCreate = (
     /* --> the Instance that's about to be saved to the database */
     user
 ) => {
-    if (!user.age) {
-        user.age = 18;
+    if (user.age) {
+        user.age += 2;
     }
 };
 
 const user = await Users.createOne({
     id: '123',
-    name: 'John'
+    name: 'John',
+    age: -1
 });
 
-console.log(user.age); // 18
+console.log(user.age); // 1
 ```
 
 It also runs when creating relating nodes
