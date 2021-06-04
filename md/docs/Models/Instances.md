@@ -86,6 +86,42 @@ For more examples of creating realted nodes, refer to the [Create operations](./
 ## Creating an Instance for an existing Node
 If a Node already exists in the database, an Instance can still be created. This is useful for running methods like `.save()` on it.
 
+### Creating an Instance for an existing Node using buildFromRecord
+When a record is available (i.e. from a QueryResult), an Instance can be built using it directly in the `buildFromRecord` static.
+
+This is the easiest and best way to build an Instance from an existing node, as its `labels` field is properly set.
+
+This static is used internally in Neogma for this purpose. 
+
+```js
+const result = await new QueryBuilder() // @see [QueryBuilder](../QueryBuilder/Overview)
+    .match({
+        model: Users,
+        where: {
+            id: '1'
+        },
+        identifier: 'u'
+    })
+    .return ('u')
+    .run();
+
+const userRecord = result.records[0]?.get('u');
+if (!userRecord) {
+    throw new Error('user not found');
+}
+
+const userInstance = Users.buildFromRecord(userRecord);
+
+console.log(userInstance.labels); // ["User"]
+
+userInstance.name = 'Some new name';
+
+await userInstance.save(); /* --> the instance will be updated */
+```
+
+### Creating an Instance for an existing Node using build
+Another way is to use the `build` static. It's not recommended as the `labels` property is not set.
+
 The first parameter of the `build` function must equal to the data of the Node, for example from the statement result.
 
 The second parameter is an object with its `status` property set to `existing`.
@@ -102,7 +138,7 @@ const result = await new QueryBuilder() // @see [QueryBuilder](../QueryBuilder/O
     .return ('u')
     .run();
 
-const userData = result.records[0]?.get('u');
+const userData = result.records[0]?.get('u')?.properties;
 if (!userData) {
     throw new Error('user not found');
 }
@@ -112,6 +148,13 @@ const userInstance = Users.build(userData, { status: 'existing' });
 userInstance.name = 'Some new name';
 
 await userInstance.save(); /* --> the instance will be updated */
+```
+
+## Instance attributes
+The labels of the Instance can be taken from the `labels` attribute. It's properly set when the Instance is built internally (i.e. in the `findMany`, `update`, `updateRelationship` statics), or when building an Instance using the [buildFromRecord](#creating-an-instance-for-an-existing-node-using-buildfromrecord) static.
+```js
+/* --> let "user" be a Users instance */
+console.log(user.labels); // ["User"]
 ```
 
 ## More Instance methods
