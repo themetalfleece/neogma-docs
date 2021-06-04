@@ -5,7 +5,7 @@ Each Instance of a Model represents a node in the database, with its label, prop
 Instances offer flexible access to a node's properties, as well as operations regarding it, such as updating/deleting the node itself and its relationships.
 
 ## Creating and saving an Instance
-An Instance is returned from various Model operations (such as [Create](./Creating-Nodes-and-Relationships), [Find](./Finding-Nodes)), or a new Instance (which doesn't yet exist in the database) can be created as follows:
+An Instance is returned from various Model operations (such as [Create](./Creating-Nodes-and-Relationships), [Find](./Finding-Nodes-And-Relationships)), or a new Instance (which doesn't yet exist in the database) can be created as follows:
 ```js
     /* --> creates an Instance of the Users model, which still doesn't exist in the database */
     const user = Users.build({

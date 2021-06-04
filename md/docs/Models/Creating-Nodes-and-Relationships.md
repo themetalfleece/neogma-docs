@@ -17,7 +17,7 @@ const user = await Users.createOne(
         validate: true,
         /* --> (optional) an existing session or transaction to use */
         session: null, // @see [Sessions](../Sessions)        
-        /* --> (optional) makes sure that the total relationships created by "where" parameters equal to 1. See below for examples. */
+        /* --> (optional) makes sure that the total relationships created by "where" parameters equal to 1. This assertion happens after the query has ran, so consider running it in a transaction so it can rollback */
         assertRelationshipsOfWhere: 1,
     }
 );

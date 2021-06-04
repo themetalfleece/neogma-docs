@@ -10,7 +10,7 @@
 > [Merging Nodes and Relationships](/docs/Models/Merging-Nodes-and-Relationships)
 > [Updating Nodes and Relationships](/docs/Models/Updating-Nodes-and-Relationships)
 > [Deleting Nodes](/docs/Models/Deleting-Nodes)
-> [Finding Nodes](/docs/Models/Finding-Nodes)
+> [Finding Nodes and Relationships](/docs/Models/Finding-Nodes-And-Relationships)
 > [Hooks](/docs/Models/Hooks)
 
 [Sessions and Transactions](/docs/Sessions-and-Transactions)
