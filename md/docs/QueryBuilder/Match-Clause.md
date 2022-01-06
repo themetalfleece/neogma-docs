@@ -114,6 +114,10 @@ const queryBuilder = new QueryBuilder().match({
             where: {
                 relProp: 1,
             },
+            /* --> (optional) minimum hops for a variable length relationship */
+            minHops: 1,
+            /* --> (optional) maximum hops for a variable length relationship. The value Infinity can be used for no limit on the max hops */
+            maxHops: 1,
         },
         /* --> the final entry must be a node */
         {

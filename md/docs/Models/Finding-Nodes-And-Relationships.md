@@ -78,6 +78,10 @@ const relationships = await Users.findRelationships({
     },
     /* --> (optional) limits the query. It's useful when the purpose is to find whether a relationship exists */
     limit: 1,
+    /* --> (optional) minimum hops for a variable length relationship */
+    minHops: 1,
+    /* --> (optional) maximum hops for a variable length relationship. The value Infinity can be used for no limit on the max hops */
+    maxHops: 1,
     /* --> (optional) an existing session or transaction to use */
     session: null,
 });
@@ -108,6 +112,10 @@ const relationships = await user.findRelationships({
     },
     /* --> (optional) limits the query. It's useful when the purpose is to find whether a relationship exists */
     limit: 1,
+    /* --> (optional) minimum hops for a variable length relationship */
+    minHops: 1,
+    /* --> (optional) maximum hops for a variable length relationship. The value Infinity can be used for no limit on the max hops */
+    maxHops: 1,
     /* --> (optional) an existing session or transaction to use */
     session: null,
 });
