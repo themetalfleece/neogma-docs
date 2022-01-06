@@ -281,4 +281,13 @@ For example, after fetching a relationship from the database, its properties can
 const relationshipProperties: UsersRelatedNodesI['Orders']['RelationshipProperties'] = queryResult.records[0].get('n').properties;
 ```
 
+## Declaring bidirectional relationships
+If a relationship from Model A to Model B is declared, the reverse relationship from Model B to Model A can be declared, but not directly. In order to avoid circular dependencies, it should be added after all models are declared, using the `Model.addRelationships` static. Follow [this issue](https://github.com/themetalfleece/neogma/issues/34#issuecomment-945848665) for more information.
+
+```ts
+ModelB.addRelationships({
+    NewAlias: ModelA.reverseRelationshipConfiguration('OtherAlias'),
+});
+```
+
 > :ToCPrevNext
