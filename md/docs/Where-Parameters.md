@@ -204,6 +204,20 @@ console.log(where.getStatement('text')); // n.x = $x
 console.log(where.getStatement('object')); // { x: $x }
 console.log(where.bindParam.get()); // { x: 5 }
 ```
+Alternatively, the operator "eq" can be used.
+```js
+const where = new Where({
+    n: {
+        x: {
+            [Op.eq]: 5,
+        }
+    },
+});
+
+console.log(where.getStatement('text')); // n.x = $x
+console.log(where.getStatement('object')); // { x: $x }
+console.log(where.bindParam.get()); // { x: 5 }
+```
 
 ### And
 The values of the parameters object are separated by an "and" operator
@@ -240,6 +254,17 @@ console.log(where.getStatement('text')); // n.x IN $x AND n.y = $y AND o.z IN $z
 // "object" statement not available
 console.log(where.bindParam.get()); // { x: [1, 2, 3], y: 2, z: [4, 5, 6] }
 ```
+
+### Comparison
+The following operators are available:
+
+| Operator | Description            | Results in |
+| -------- | ---------------------- | ---------- |
+| ne       | not equals             | <>         |
+| gt       | greater than           | >          |
+| gte      | greater than or equals | >=         |
+| lt       | less than              | <          |
+| lte      | less than or equals    | <=         |
 
 ### Contains
 ```js
