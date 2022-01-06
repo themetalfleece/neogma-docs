@@ -230,6 +230,16 @@ A sample Model definition with all configuration options is the following. Note 
 > :Buttons
 > > :CopyButton
 
+## Relating a Model to itself
+Instead of providing a Model to a relationship `model` field, the string `"self"` can be given to relate a Model to itself:
+```ts
+...
+relationships: {
+   Orders: {
+        model: 'self',
+...
+```
+
 ## Using the Model's helpers
 The created Model provides functions for database operations, as well as the following helpers
 ```js
