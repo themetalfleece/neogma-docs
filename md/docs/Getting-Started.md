@@ -19,12 +19,12 @@ The used classes and functions can be imported as follows:
 > :Tabs
 > > :Tab title=require
 > > ```js
-> > const { BindParam, ModelFactory, Neogma, QueryBuilder, QueryRunner, Where, getSession, Op, neo4jDriver } = require('neogma');
+> > const { BindParam, ModelFactory, Neogma, QueryBuilder, QueryRunner, Where, Literal, getSession, Op, neo4jDriver } = require('neogma');
 > > ```
 >
 > > :Tab title=import
 > > ```ts
-> > import { BindParam, ModelFactory, Neogma, QueryBuilder, QueryRunner, Where, getSession, Op, neo4jDriver } from 'neogma';
+> > import { BindParam, ModelFactory, Neogma, QueryBuilder, QueryRunner, Where, Literal, getSession, Op, neo4jDriver } from 'neogma';
 > > // importing types
 > > import { 
 > >     /* --> used in Model definition */

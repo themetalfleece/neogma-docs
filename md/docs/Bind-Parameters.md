@@ -129,6 +129,8 @@ console.log(uniqueName); // x__aaaa
 console.log(bindParam.get()); // { x: 5, y: 'bar', x__aaaa: 4 }
 ```
 
+The `getUniqueNameAndAddWithLiteral` method can be used for a similar functionality with `getUniqueNameAndAdd`, but if the given value is an instance of Literal, it returns it as is.
+
 ## Cloning a BindParam
 
 A BindParam instance can be cloned, so a new one is returned with the same parameters.

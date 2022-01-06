@@ -281,6 +281,28 @@ console.log(where.getStatement('text')); // n.x CONTAINS $x
 console.log(where.bindParam.get()); // { x: 'xyz' }
 ```
 
+## Using a literal string
+
+The class `Literal` can be used to use any given string in a Where condition.
+
+```js
+const where = new Where({
+    n: {
+        x: 2,
+        y: new Literal('n.x')
+    },
+    o: {
+        z: {
+            [Op.gt]: new Literal('n.y'),
+        }
+    }
+});
+
+console.log(where.getStatement('text')); // n.x = $x AND n.y = n.x AND o.z >= n.y
+// "object" statement not available
+console.log(where.bindParam.get()); // { x: 2 }
+```
+
 ## Acquire a Where instance
 
 The `acquire` static can be used to ensure that a Where instance is at hand. If one is passed, it will be returned as is. If an object with where parameters is passed, a new Where instance will be created with them. Else, a new one will be created.

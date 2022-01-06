@@ -52,3 +52,7 @@ const queryBuilder = new QueryBuilder(
 console.log(queryBuilder.getStatement()); // WHERE identifier1.id = $id AND identifier2.id = $id__aaaa AND identifier2.age = $age
 console.log(queryBuilder.getBindParam().get()); // { id: '20', id__aaaa: '21', age: 28 }
 ```
+
+## Using a literal string
+
+A [Literal String](../Where-Parameters.md#using-a-literal-string) can be used at Where conditions, when the typing supports it.

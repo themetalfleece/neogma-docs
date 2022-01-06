@@ -135,6 +135,10 @@ An existing session can be given
     await new QueryBuilder()
         .raw('match n return n')
         .run(session);
-``` 
+```
+
+## Using a literal string
+
+A [Literal String](../Where-Parameters.md#using-a-literal-string) can be used at Where conditions, when the typing supports it.
 
 > :ToCPrevNext
