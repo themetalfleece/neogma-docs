@@ -1,5 +1,19 @@
 # Defining a Model
 
+## Importing Neogma
+To avoid importing issues, The instance of the "Neogma" class (refered to as "neogma" in those examples) must exported before any Model is imported.
+
+For example, in `App.ts`:
+```ts
+import { Neogma } from 'neogma';
+export const neogma = new Neogma(...);
+import { SomeModel } from './MyModel';
+```
+In `MyModel.ts`
+```ts
+import { neogma } from './App';
+```
+
 ## Using ModelFactory
 To define a Model, the information presented at [Overview](./Overview) must be provided.
 
